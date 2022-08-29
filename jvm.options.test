@@ -1,0 +1,20 @@
+-Xss256k -Xms512m -Xmx1g
+-XX:MaxMetaspaceSize=256m
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:HeapDumpPath=/home/application/logs/jvmLog/
+-XX:ErrorFile=/home/application/logs/jvmLog/jvm_err.log
+-XX:+UseParNewGC -XX:+UseConcMarkSweepGC
+-XX:+ScavengeBeforeFullGC
+-XX:+CMSScavengeBeforeRemark
+-XX:+CMSParallelRemarkEnabled
+-XX:CMSInitiatingOccupancyFraction=70
+-XX:+UseGCLogFileRotation
+-XX:NumberOfGCLogFiles=5
+-XX:GCLogFileSize=50M
+-verbose:gc -XX:+PrintHeapAtGC
+-XX:+PrintGCDetails
+-XX:+PrintGCDateStamps
+-XX:+PrintGCTimeStamps
+-XX:+PrintGCApplicationStoppedTime
+-XX:-OmitStackTraceInFastThrow
+-Xloggc:/home/application/logs/jvmLog/gc.log

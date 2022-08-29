@@ -1,0 +1,13 @@
+${AnsiColor.BRIGHT_YELLOW}
+
+  ___ ___
+ /   |   \   ___________  _____   ____   ______
+/    ~    \_/ __ \_  __ \/     \_/ __ \ /  ___/
+\    Y    /\  ___/|  | \/  Y Y  \  ___/ \___ \
+ \___|_  /  \___  >__|  |__|_|  /\___  >____  >
+       \/       \/            \/     \/     \/
+
+
+${AnsiColor.BRIGHT_BLUE}
+::: Project (version:${application.version}) :::              Spring-Boot ${spring-boot.version}
+${AnsiColor.DEFAULT}

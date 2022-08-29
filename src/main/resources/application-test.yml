@@ -1,0 +1,52 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    dynamic:
+      primary: lottery-center
+      druid:
+        # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+        filters: stat, wall, slf4j
+        # 连接池初始化大小
+        initial-size: 1
+        # 最小保留数
+        min-idle: 2
+        # 最大连接数
+        max-active: 10
+        # 获取连接的最大等待时间，单位毫秒
+        max-wait: 3000
+        # 检测关闭空闲连接的间隔时间，单位毫秒
+        time-between-eviction-runs-millis: 60000
+        # 连接的最小生存时间，，单位毫秒
+        min-evictable-idle-time-millis: 300000
+        validation-query: select 1
+        test-while-idle: true
+        test-on-borrow: false
+        test-on-return: false
+        # 打开PSCache，并且指定每个连接上PSCache的大小
+        pool-prepared-statements: true
+      datasource:
+        lottery-center:
+          username: root
+          password: Kc#123456
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://172.18.1.134:3306/lottery-center?useUnicode=true&autoReconnect=true&characterEncoding=utf-8
+        lottery-center-slave:
+          username: root
+          password: Kc#123456
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://172.18.1.134:3306/lottery-center?useUnicode=true&autoReconnect=true
+  redis:
+    database: 0
+    host: 10.0.101.208
+    port: 6379
+    password: It0SVN8R7BZYpJHl
+    lettuce:
+      pool:
+        max-active: 100
+        min-idle: 20
+        max-idle: 50
+
+log:
+  path: /data1/logs/${spring.application.name}

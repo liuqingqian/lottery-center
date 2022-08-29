@@ -1,0 +1,41 @@
+spring:
+  profiles:
+    # 使用开发环境
+    active: @profiles.active@
+  mvc:
+    throw-exception-if-no-handler-found: true
+    favicon:
+      enabled: false
+  resources:
+    add-mappings: false
+  application:
+    name: lottery-center
+
+feign:
+  okhttp:
+    enabled: true
+  httpclient:
+    max-connections-per-route: 400
+    max-connections: 3000
+    disable-ssl-validation: true
+    follow-redirects: false
+    time-to-live: 50
+  client:
+    config:
+      default:
+        connectTimeout: 2000
+        readTimeout: 5000
+
+logging:
+  config: classpath:logback-spring-offline.xml
+
+log:
+  path: /home/beicai/logs/${spring.application.name}
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      base-path: /
