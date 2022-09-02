@@ -5,18 +5,19 @@ import java.util.Objects;
 /**
  * Created by liuqingqian on 2022/9/1.
  * <p>
- * 彩票记录状态枚举 @1:已开奖@2:未开奖
+ * 模拟投注状态枚举 @1:未开奖@2:未中奖@3:已中奖
  */
-public enum LotStatusEnum {
+public enum MockLotStatusEnum {
 
-    HAS_LOT(1, "已开奖"),
-    NOT_LOT(2, "未开奖");
+    NOT_LOT(1, "未开奖"),
+    LOSING_LOT(2, "未中奖"),
+    WINNING_LOT(3, "已中奖");
 
     private Integer code;
 
     private String desc;
 
-    LotStatusEnum(Integer code, String desc) {
+    MockLotStatusEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }
@@ -33,12 +34,12 @@ public enum LotStatusEnum {
         return this.getCode().equals(code);
     }
 
-    public static LotStatusEnum fromCode(Integer code) {
+    public static MockLotStatusEnum fromCode(Integer code) {
         if (Objects.isNull(code)) {
             return null;
         }
-        LotStatusEnum[] values = values();
-        for (LotStatusEnum item : values) {
+        MockLotStatusEnum[] values = values();
+        for (MockLotStatusEnum item : values) {
             if (item.getCode().equals(code)) {
                 return item;
             }
