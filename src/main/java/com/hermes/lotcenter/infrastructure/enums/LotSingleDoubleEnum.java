@@ -4,11 +4,14 @@ import java.util.Objects;
 
 /**
  * Created by liuqingqian on 2022/9/1.
+ * <p>
+ * 单双枚举 @1:单@2:双@:3豹
  */
 public enum LotSingleDoubleEnum {
 
     ODD(1, "单"),
-    EVEN(2, "双");
+    EVEN(2, "双"),
+    DUAL(3, "豹");
 
     private Integer code;
 

@@ -163,6 +163,8 @@ public class LotTableParserDomain {
             return "大";
         } else if (tdTxt.contains("小")) {
             return "小";
+        } else if (tdTxt.contains("豹")) {
+            return "豹";
         }
         return null;
     }
@@ -176,6 +178,8 @@ public class LotTableParserDomain {
             return "双";
         } else if (tdTxt.contains("单")) {
             return "单";
+        } else if (tdTxt.contains("豹")) {
+            return "豹";
         }
         return null;
     }

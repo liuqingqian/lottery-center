@@ -30,8 +30,8 @@ public class FileOptDomainTest {
     public void testWriteFile() {
         String url = LotteryConfig.RESULT_85_URL;
         Map<String, Object> params = new HashMap<>();
-        String lotCode = "K41";
-        String startDate = "2022-08-29";
+        String lotCode = "FFK3";
+        String startDate = "2022-09-02";
         params.put("lotCode", lotCode);
         params.put("startDate", startDate);
         String rawContent = downloadLotDomain.getHtmlRawContent(url, params);
@@ -43,8 +43,8 @@ public class FileOptDomainTest {
 
     @Test
     public void testReadLotFile() {
-        String lotCode = "AZK3";
-        String startDate = "2022-08-23";
+        String lotCode = "FFK3";
+        String startDate = "2022-09-02";
         String rawContent = fileOptDomain.readLotFile(lotCode, startDate);
         Assert.assertNotNull("读取开奖结果文件内容为空", rawContent);
     }

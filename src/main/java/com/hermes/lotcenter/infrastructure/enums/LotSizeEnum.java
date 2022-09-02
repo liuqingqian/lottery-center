@@ -5,11 +5,12 @@ import java.util.Objects;
 /**
  * Created by liuqingqian on 2022/9/1.
  * <p>
- * 大小枚举 @1:小@2:大
+ * 大小枚举 @1:小@2:大@:3豹
  */
 public enum LotSizeEnum {
     SMALL(1, "小"),
-    BIG(2, "大");
+    BIG(2, "大"),
+    DUAL(3, "豹");
 
     private Integer code;
 

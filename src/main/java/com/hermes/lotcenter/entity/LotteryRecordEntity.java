@@ -46,11 +46,11 @@ public class LotteryRecordEntity {
     private Integer sum;
 
     @TableField("size")
-    @ApiModelProperty("大小@1:小@2:大")
+    @ApiModelProperty("大小@1:小@2:大@:3豹")
     private Integer size;
 
     @TableField("single_double")
-    @ApiModelProperty("单双@1:单@2:双")
+    @ApiModelProperty("单双@1:单@2:双@:3豹")
     private Integer singleDouble;
 
     @TableField("lot_status")
@@ -61,9 +61,9 @@ public class LotteryRecordEntity {
     @ApiModelProperty("开奖时间")
     private String lotTime;//yyyy-MM-dd HH:mm:ss
 
-    @TableField("create_time")
-    private String createTime;//yyyy-MM-dd HH:mm:ss
+    @TableField("created_time")
+    private String createdTime;//yyyy-MM-dd HH:mm:ss
 
-    @TableField("update_time")
-    private String updateTime;//yyyy-MM-dd HH:mm:ss
+    @TableField("updated_time")
+    private String updatedTime;//yyyy-MM-dd HH:mm:ss
 }

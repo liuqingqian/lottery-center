@@ -27,7 +27,7 @@ public class DownloadLotDomainTest {
     public void testGetHtmlRawContent() {
         String url = LotteryConfig.RESULT_85_URL;
         Map<String, Object> params = new HashMap<>();
-        String lotCode = "K41";
+        String lotCode = "FFK3";
         String startDate = "2022-08-29";
         params.put("lotCode", lotCode);
         params.put("startDate", startDate);

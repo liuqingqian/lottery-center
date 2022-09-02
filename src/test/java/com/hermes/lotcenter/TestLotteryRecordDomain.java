@@ -34,8 +34,8 @@ public class TestLotteryRecordDomain {
 
     @Test
     public void testBatchInsert() {
-        String lotCode = "AZK3";
-        String startDate = "2022-08-23";
+        String lotCode = "FFK3";
+        String startDate = "2022-08-31";
 //        String lotCode = "K41";
 //        String startDate = "2022-08-29";
         String rawContent = fileOptDomain.readLotFile(lotCode, startDate);
@@ -54,5 +54,24 @@ public class TestLotteryRecordDomain {
         System.out.println("lotteryRecordEntities = " + lotteryRecordEntities);
         boolean batchInsert = lotteryRecordDomain.batchInsert(lotteryRecordEntities);
         Assert.assertTrue("批量插入失败", batchInsert);
+    }
+
+    @Test
+    public void testQuery() {
+        String lotCode = "FFK3";
+        String periodNumber = "202209010025";
+        LotteryRecordEntity lotteryRecordEntity = lotteryRecordDomain.query(lotCode, periodNumber);
+        Assert.assertNotNull("查询开奖记录为空", lotteryRecordEntity);
+        System.out.println("lotteryRecordEntity = " + lotteryRecordEntity);
+    }
+
+    @Test
+    public void testQueryList() {
+        String lotCode = "FFK3";
+        String startDate = "2022-08-31";
+        List<LotteryRecordEntity> lotteryRecordEntities = lotteryRecordDomain.queryListByDate(lotCode, startDate);
+        Assert.assertNotNull("查询开奖记录列表为空", lotteryRecordEntities);
+        Assert.assertTrue("查询开奖记录列表无数据", lotteryRecordEntities.size() > 0);
+        System.out.println("lotteryRecordEntities = " + lotteryRecordEntities);
     }
 }
