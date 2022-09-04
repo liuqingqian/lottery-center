@@ -43,7 +43,7 @@ public class TestMockLotteryDomain {
 
 
         String lotCode = "FFK3";
-        String startDate = "2022-09-02";
+        String startDate = "2022-08-21";
         List<LotteryRecordEntity> lotteryRecordEntities = lotteryRecordDomain.queryListByDate(lotCode, startDate);
         Assert.assertNotNull("查询开奖记录列表为空", lotteryRecordEntities);
         Assert.assertTrue("查询开奖记录列表无数据", lotteryRecordEntities.size() > 0);
@@ -60,7 +60,15 @@ public class TestMockLotteryDomain {
 
         String prefix = startDate.replace("-", "");
         int totalPeriod = lotteryRecordEntities.size();
-        for (int periodIndex = 1; periodIndex <= totalPeriod; periodIndex++) {
+//        int startPeriodIndex = 1;
+//        int endPeriodIndex = totalPeriod;
+
+        int startCycleGroup = 18;//18、20、22
+        int endCycleGroup = 24;
+        int cycleTime = 60;
+        int startPeriodIndex = (startCycleGroup - 1) * cycleTime;
+        int endPeriodIndex = endCycleGroup * cycleTime;
+        for (int periodIndex = startPeriodIndex; periodIndex <= endPeriodIndex; periodIndex++) {
             //当期期数
             String currentPeriodNo = String.format(FORMAT, prefix, periodIndex);
             //上期期数
@@ -150,12 +158,12 @@ public class TestMockLotteryDomain {
         Integer initAccountAmount = 10000;
 //        List<Integer> lotStrategy = Arrays.asList(5, 4, 3, 2, 2);
 //        List<Integer> lotStrategy = Arrays.asList(100, 80, 60, 50, 50);
-        List<Integer> lotStrategy = Arrays.asList(300, 240, 180, 150, 150);
-//        List<Integer> lotStrategy = Arrays.asList(500, 400, 300, 250, 250);
+//        List<Integer> lotStrategy = Arrays.asList(300, 240, 180, 150, 150);
+        List<Integer> lotStrategy = Arrays.asList(500, 400, 300, 250, 250);
 
 
         String lotCode = "FFK3";
-        String startDate = "2022-09-01";
+        String startDate = "2022-08-31";
         List<LotteryRecordEntity> lotteryRecordEntities = lotteryRecordDomain.queryListByDate(lotCode, startDate);
         Assert.assertNotNull("查询开奖记录列表为空", lotteryRecordEntities);
         Assert.assertTrue("查询开奖记录列表无数据", lotteryRecordEntities.size() > 0);
@@ -172,7 +180,14 @@ public class TestMockLotteryDomain {
 
         String prefix = startDate.replace("-", "");
         int totalPeriod = lotteryRecordEntities.size();
-        for (int periodIndex = 1; periodIndex <= totalPeriod; periodIndex++) {
+//        int startPeriodIndex = 1;
+//        int endPeriodIndex = totalPeriod;
+        int startCycleGroup = 18;//18（1021）、20（1141））、22（1261）
+        int endCycleGroup = 24;
+        int cycleTime = 60;
+        int startPeriodIndex = (startCycleGroup - 1) * cycleTime;
+        int endPeriodIndex = endCycleGroup * cycleTime;
+        for (int periodIndex = startPeriodIndex; periodIndex <= endPeriodIndex; periodIndex++) {
             //当期期数
             String currentPeriodNo = String.format(FORMAT, prefix, periodIndex);
             //上期期数
@@ -252,7 +267,30 @@ public class TestMockLotteryDomain {
                 .collect(Collectors.toList());
 
         System.out.println("mockLotRecordList = " + mockLotRecordList);
-
-
     }
+//    LotCycleMatchingScoreDTO(cycleGroup=1, cycleTime=60, sizeMatchingScore=62, singleDoubleMatchingScore=53)
+//    LotCycleMatchingScoreDTO(cycleGroup=2, cycleTime=60, sizeMatchingScore=58, singleDoubleMatchingScore=66)
+//    LotCycleMatchingScoreDTO(cycleGroup=3, cycleTime=60, sizeMatchingScore=68, singleDoubleMatchingScore=62)
+//    LotCycleMatchingScoreDTO(cycleGroup=4, cycleTime=60, sizeMatchingScore=71, singleDoubleMatchingScore=76)
+//    LotCycleMatchingScoreDTO(cycleGroup=5, cycleTime=60, sizeMatchingScore=54, singleDoubleMatchingScore=47)
+//    LotCycleMatchingScoreDTO(cycleGroup=6, cycleTime=60, sizeMatchingScore=58, singleDoubleMatchingScore=59)
+//    LotCycleMatchingScoreDTO(cycleGroup=7, cycleTime=60, sizeMatchingScore=60, singleDoubleMatchingScore=58)
+//    LotCycleMatchingScoreDTO(cycleGroup=8, cycleTime=60, sizeMatchingScore=66, singleDoubleMatchingScore=61)
+//    LotCycleMatchingScoreDTO(cycleGroup=9, cycleTime=60, sizeMatchingScore=67, singleDoubleMatchingScore=49)
+//    LotCycleMatchingScoreDTO(cycleGroup=10, cycleTime=60, sizeMatchingScore=44, singleDoubleMatchingScore=45)
+//    LotCycleMatchingScoreDTO(cycleGroup=11, cycleTime=60, sizeMatchingScore=67, singleDoubleMatchingScore=61)
+//    LotCycleMatchingScoreDTO(cycleGroup=12, cycleTime=60, sizeMatchingScore=59, singleDoubleMatchingScore=61)
+//    LotCycleMatchingScoreDTO(cycleGroup=13, cycleTime=60, sizeMatchingScore=52, singleDoubleMatchingScore=77)
+//    LotCycleMatchingScoreDTO(cycleGroup=14, cycleTime=60, sizeMatchingScore=57, singleDoubleMatchingScore=72)
+//    LotCycleMatchingScoreDTO(cycleGroup=15, cycleTime=60, sizeMatchingScore=53, singleDoubleMatchingScore=57)
+//    LotCycleMatchingScoreDTO(cycleGroup=16, cycleTime=60, sizeMatchingScore=76, singleDoubleMatchingScore=67)
+//    LotCycleMatchingScoreDTO(cycleGroup=17, cycleTime=60, sizeMatchingScore=57, singleDoubleMatchingScore=72)
+//    LotCycleMatchingScoreDTO(cycleGroup=18, cycleTime=60, sizeMatchingScore=64, singleDoubleMatchingScore=71)
+//    LotCycleMatchingScoreDTO(cycleGroup=19, cycleTime=60, sizeMatchingScore=60, singleDoubleMatchingScore=44)
+//    LotCycleMatchingScoreDTO(cycleGroup=20, cycleTime=60, sizeMatchingScore=51, singleDoubleMatchingScore=62)
+//    LotCycleMatchingScoreDTO(cycleGroup=21, cycleTime=60, sizeMatchingScore=47, singleDoubleMatchingScore=60)
+//    LotCycleMatchingScoreDTO(cycleGroup=22, cycleTime=60, sizeMatchingScore=72, singleDoubleMatchingScore=63)
+//    LotCycleMatchingScoreDTO(cycleGroup=23, cycleTime=60, sizeMatchingScore=60, singleDoubleMatchingScore=62)
+//    LotCycleMatchingScoreDTO(cycleGroup=24, cycleTime=60, sizeMatchingScore=57, singleDoubleMatchingScore=57)
+
 }

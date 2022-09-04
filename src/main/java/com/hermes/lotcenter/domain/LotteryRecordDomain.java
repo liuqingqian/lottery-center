@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.beicai.common.DateTimeUtil;
+import com.google.common.collect.Lists;
 import com.hermes.lotcenter.domain.dto.LotRecordDTO;
 import com.hermes.lotcenter.entity.LotteryRecordEntity;
 import com.hermes.lotcenter.infrastructure.enums.LotSingleDoubleEnum;
@@ -14,6 +15,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -45,7 +50,7 @@ public class LotteryRecordDomain extends ServiceImpl<LotteryRecordMapper, Lotter
 
     public List<LotteryRecordEntity> queryListByDate(String code, String startDate) {
         if (StringUtils.isBlank(code) || StringUtils.isBlank(startDate)) {
-            return null;
+            return Lists.newArrayList();
         }
 
         String start = DateTimeUtil.dateToMidnightDateTime(startDate);
@@ -56,6 +61,37 @@ public class LotteryRecordDomain extends ServiceImpl<LotteryRecordMapper, Lotter
         queryWrapper.lt(LotteryRecordEntity::getLotTime, end);
 
         return baseMapper.selectList(queryWrapper);
+    }
+
+    public List<LotteryRecordEntity> queryFileListByDate(String code, String startDate) {
+        //查询开始日期文件中对应的开奖集合：2022-01-07 00:00:00 -- 2022-01-06 00:01:00
+        if (StringUtils.isBlank(code) || StringUtils.isBlank(startDate)) {
+            return Lists.newArrayList();
+        }
+
+        String start = DateTimeUtil.dateToMidnightDateTime(startDate);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = dateFormat.parse(startDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+
+        String endDate = dateFormat.format(calendar.getTime());
+        String end = DateTimeUtil.dateToMidnightDateTime(endDate);
+        LambdaQueryWrapper<LotteryRecordEntity> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(LotteryRecordEntity::getCode, code);
+        queryWrapper.gt(LotteryRecordEntity::getLotTime, start);
+        queryWrapper.le(LotteryRecordEntity::getLotTime, end);
+        List<LotteryRecordEntity> lotteryRecordEntities = baseMapper.selectList(queryWrapper);
+        if (CollectionUtils.isEmpty(lotteryRecordEntities)) {
+            return Lists.newArrayList();
+        }
+        return lotteryRecordEntities;
     }
 
     public LotteryRecordEntity toLotteryRecordEntity(LotRecordDTO lotRecordDTO) {
