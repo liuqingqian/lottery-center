@@ -37,7 +37,7 @@ public class TestLotteryRecordDomain {
     @Test
     public void testBatchInsert() {
         String lotCode = "FFK3";
-        String startDate = "2022-09-04";
+        String startDate = "2022-09-05";
 //        String lotCode = "K41";
 //        String startDate = "2022-08-29";
         String rawContent = fileOptDomain.readLotFile(lotCode, startDate);
@@ -68,7 +68,7 @@ public class TestLotteryRecordDomain {
     public void testMonthBatchInsert() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
         String lotCode = "FFK3";
-        String startMonth = "2022-03";
+        String startMonth = "2022-01";
         Date dateMonth = dateFormat.parse(startMonth);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateMonth);

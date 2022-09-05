@@ -84,14 +84,14 @@ public class TestAnalysisLotteryDomain {
     public void testDayMatchingScore() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
         String lotCode = "FFK3";
-        String startMonth = "2022-07";
+        String startMonth = "2022-09";
         Date dateMonth = dateFormat.parse(startMonth);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateMonth);
         int daysOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         String format = "%s-%02d";
         List<DayTimeHotDTO> dayTimeHots = Lists.newArrayList();
-        for (int i = 1; i <= daysOfMonth; i++) {
+        for (int i = 1; i <= 5; i++) {
             DayTimeHotDTO dayTimeHot = new DayTimeHotDTO();
             String startDate = String.format(format, startMonth, i);
             System.out.println("startDate = " + startDate);

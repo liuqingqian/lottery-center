@@ -35,7 +35,7 @@ public class FileOptDomainTest {
         String url = LotteryConfig.RESULT_85_URL;
         Map<String, Object> params = new HashMap<>();
         String lotCode = "FFK3";
-        String startDate = "2022-09-04";
+        String startDate = "2022-09-05";
         params.put("lotCode", lotCode);
         params.put("startDate", startDate);
         String rawContent = downloadLotDomain.getHtmlRawContent(url, params);
@@ -58,7 +58,7 @@ public class FileOptDomainTest {
     public void testMonthFile() throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM");
         String lotCode = "FFK3";
-        String startMonth = "2022-03";
+        String startMonth = "2022-01";
         Date dateMonth = dateFormat.parse(startMonth);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateMonth);
