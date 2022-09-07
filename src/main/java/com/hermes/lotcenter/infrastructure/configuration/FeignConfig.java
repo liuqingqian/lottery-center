@@ -1,7 +1,7 @@
 package com.hermes.lotcenter.infrastructure.configuration;
 
 import com.beicai.common.exception.RpcException;
-import com.beicai.common.trace.TraceIdUtil;
+import com.hermes.lotcenter.domain.LotteryConfig;
 import feign.Logger;
 import feign.Request;
 import feign.RequestInterceptor;
@@ -39,8 +39,16 @@ public class FeignConfig {
     @Bean
     public RequestInterceptor requestInterceptor() {
         return (template) -> {
-            String traceId = TraceIdUtil.traceId();
-            template.header(TraceIdUtil.TRACE_ID, traceId);
+//            String traceId = TraceIdUtil.traceId();
+//            template.header(TraceIdUtil.TRACE_ID, traceId);
+            template.header("Host", LotteryConfig.HOST);
+            template.header("Origin", LotteryConfig.ORIGIN);
+            template.header("Accept-Encoding", "gzip, deflate");
+            template.header("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8");
+            template.header("Pragma", "no-cache");
+            template.header("Cache-Control", "no-cache");
+            template.header("Proxy-Connection", "keep-alive");
+            template.header("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36");
         };
     }
 

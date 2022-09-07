@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.collections4.MapUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.config.RequestConfig;
@@ -53,7 +54,7 @@ public class NetUtil2 {
         NetUtil2.sNetworkListener = networkListener;
     }
 
-    public static Response get(String url) {
+    public static Response getHeaders(String url, Map<String, String> headers) {
         Response res;
         HttpGet get = new HttpGet(url);
         RequestConfig rc = RequestConfig.copy(RequestConfig.DEFAULT).setConnectTimeout(TIMEOUT)
@@ -61,15 +62,24 @@ public class NetUtil2 {
         get.setConfig(rc);
         get.addHeader("Connection", "Keep-Alive");
         get.addHeader("Accept-Encoding", "gzip,deflate");
+        if (MapUtils.isNotEmpty(headers)) {
+            headers.entrySet().forEach(header -> {
+                get.addHeader(header.getKey(), header.getValue());
+            });
+        }
         res = send(get);
         return res;
     }
 
     public static Response get(String url, Map<String, Object> params) {
-        return get(url, params, true);
+        return get(url, params, null, true);
     }
 
-    public static Response get(String url, Map<String, Object> params, boolean encode) {
+    public static Response get(String url, Map<String, Object> params, Map<String, String> headers) {
+        return get(url, params, headers, true);
+    }
+
+    public static Response get(String url, Map<String, Object> params, Map<String, String> headers, boolean encode) {
 
         StringBuilder sb = new StringBuilder(url);
         if (url.contains("?")) {
@@ -91,10 +101,10 @@ public class NetUtil2 {
             sb.append(key).append("=").append(val).append("&");
         }
 
-        return get(sb.toString());
+        return getHeaders(sb.toString(), headers);
     }
 
-    public static Response post(String url, Map<String, Object> params) {
+    public static Response post(String url, Map<String, Object> params, Map<String, String> headers) {
         List<NameValuePair> nvps = new ArrayList<>();
         Set<String> keySet = params.keySet();
         for (String key : keySet) {
@@ -107,11 +117,11 @@ public class NetUtil2 {
             e.printStackTrace();
         }
 
-        return post(url, entity, "", "");
+        return post(url, entity, headers);
 
     }
 
-    public static Response postJson(String url, Map<String, Object> params) {
+    public static Response postJson(String url, Map<String, Object> params, Map<String, String> headers) {
         HttpPost post = new HttpPost(url);
 
         RequestConfig rc = RequestConfig.copy(RequestConfig.DEFAULT).setConnectTimeout(TIMEOUT)
@@ -126,6 +136,11 @@ public class NetUtil2 {
         }
         post.addHeader("Content-Type", "application/json");
 
+        if (MapUtils.isNotEmpty(headers)) {
+            headers.entrySet().forEach(header -> {
+                post.addHeader(header.getKey(), header.getValue());
+            });
+        }
         post.setEntity(entity);
 
 
@@ -133,7 +148,7 @@ public class NetUtil2 {
 
     }
 
-    public static Response post(String url, HttpEntity entity, String ua, String cookies) {
+    public static Response post(String url, HttpEntity entity, Map<String, String> headers) {
         HttpPost post = new HttpPost(url);
 
         RequestConfig rc = RequestConfig.copy(RequestConfig.DEFAULT).setConnectTimeout(TIMEOUT)
@@ -145,8 +160,14 @@ public class NetUtil2 {
 
         post.setEntity(entity);
 
-        post.addHeader("Cookie", cookies);
-        post.addHeader("User-Agent", ua);
+        if (MapUtils.isNotEmpty(headers)) {
+            headers.entrySet().forEach(header -> {
+                post.addHeader(header.getKey(), header.getValue());
+            });
+        }
+
+//        post.addHeader("Cookie", cookies);
+//        post.addHeader("User-Agent", ua);
 
         return send(post);
     }

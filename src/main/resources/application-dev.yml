@@ -52,3 +52,7 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 log:
   path: ./logs
+
+logging:
+  level:
+    com.hermes.lotcenter.domain.rpc.LotteryClient: debug

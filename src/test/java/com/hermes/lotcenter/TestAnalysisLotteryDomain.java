@@ -50,7 +50,7 @@ public class TestAnalysisLotteryDomain {
     @Test
     public void testGroupMatchingScore() {
         String lotCode = "FFK3";
-        String startDate = "2022-09-02";
+        String startDate = "2022-09-06";
         List<LotMatchingScoreDTO> lotMatchingScoreList = analysisLotteryDomain.matchingScoreList(lotteryRecordDomain.queryListByDate(lotCode, startDate));
         int totalSize = lotMatchingScoreList.size();
         int cycleTime = 60;
@@ -62,6 +62,7 @@ public class TestAnalysisLotteryDomain {
             LotCycleMatchingScoreDTO cycleMatchingScoreDTO = cycleMatchingScoreMap.get(cycleGroup);
             if (Objects.isNull(cycleMatchingScoreDTO)) {
                 cycleMatchingScoreDTO = new LotCycleMatchingScoreDTO();
+                cycleMatchingScoreDTO.setDate(startDate);
                 cycleMatchingScoreDTO.setCycleGroup(cycleGroup);
                 cycleMatchingScoreDTO.setCycleTime(cycleTime);
                 cycleMatchingScoreDTO.setSizeMatchingScore(0);
@@ -91,7 +92,7 @@ public class TestAnalysisLotteryDomain {
         int daysOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         String format = "%s-%02d";
         List<DayTimeHotDTO> dayTimeHots = Lists.newArrayList();
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 6; i++) {
             DayTimeHotDTO dayTimeHot = new DayTimeHotDTO();
             String startDate = String.format(format, startMonth, i);
             System.out.println("startDate = " + startDate);
