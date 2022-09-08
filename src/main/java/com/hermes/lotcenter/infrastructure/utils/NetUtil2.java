@@ -104,7 +104,7 @@ public class NetUtil2 {
         return getHeaders(sb.toString(), headers);
     }
 
-    public static Response post(String url, Map<String, Object> params, Map<String, String> headers) {
+    public static Response post(String url, Map<String, ?> params, Map<String, String> headers) {
         List<NameValuePair> nvps = new ArrayList<>();
         Set<String> keySet = params.keySet();
         for (String key : keySet) {

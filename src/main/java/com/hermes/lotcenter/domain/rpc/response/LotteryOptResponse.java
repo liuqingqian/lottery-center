@@ -25,6 +25,17 @@ public class LotteryOptResponse {
     @ApiModelProperty("是否成")
     private Boolean success;
 
+    @ApiModelProperty("消息")
+    private String msg;
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public boolean nonSuccess() {
+        return !isSuccess();
+    }
+
     @Data
     @ApiModel("当前")
     public static class Current {

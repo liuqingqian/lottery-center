@@ -11,13 +11,22 @@ import lombok.Data;
 @ApiModel("指定期号开奖记录请求结果信息")
 public class LotteryLastResponse {
 
-
     @ApiModelProperty("最近")
     private Last last;
 
     @ApiModelProperty("是否成")
     private Boolean success;
 
+    @ApiModelProperty("消息")
+    private String msg;
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public boolean nonSuccess() {
+        return !isSuccess();
+    }
 
     @Data
     @ApiModel("最近")

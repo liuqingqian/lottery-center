@@ -1,5 +1,7 @@
 package com.hermes.lotcenter;
 
+import com.hermes.lotcenter.domain.DoBetDomain;
+import com.hermes.lotcenter.infrastructure.enums.BetDataIdEnum;
 import com.hermes.lotcenter.infrastructure.utils.NetUtil2;
 
 import java.io.IOException;
@@ -22,7 +24,7 @@ public class TestLotteryNetUtil {
 //Upgrade-Insecure-Requests: 1
 //User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
     public static void main(String[] args) throws IOException {
-        post() ;
+        post();
     }
 
 
@@ -65,7 +67,7 @@ public class TestLotteryNetUtil {
 
         String origin = "http://ft5812.com";
         String referer = origin + "/lotteryV2/index.do";
-        String url = origin + "/lotteryV2/lotV2Op.do?lotCode=FFK3";
+        String url = origin + "/lotteryV2Bet/dolotV2Bet.do";
 
         Map<String, String> headers = new HashMap<>();
         headers.put("Accept", "application/json, text/javascript, */*; q=0.01");
@@ -78,11 +80,17 @@ public class TestLotteryNetUtil {
         headers.put("Referer", referer);
         headers.put("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36");
         headers.put("X-Requested-With", "XMLHttpRequest");
+//        Cookie=SESSION=77954a18-d501-46e5-b9e8-aefb529513a1
+        headers.put("Cookie", "SESSION=77954a18-d501-46e5-b9e8-aefb529513a1");
 
-        Map<String, Object> params = new HashMap<>();
         String lotCode = "FFK3";
-        params.put("lotCode", lotCode);
-        NetUtil2.Response res = NetUtil2.post(url, params, headers);
+        String qiHao = "202209071316";
+        Integer money = 1;
+        String name = "双";
+        BetDataIdEnum dataIdEnum = BetDataIdEnum.fromName(name);
+        DoBetDomain doBetDomain = new DoBetDomain();
+        Map<String, ?> criteria = doBetDomain.buildFromCriteria(lotCode, qiHao, money, dataIdEnum);
+        NetUtil2.Response res = NetUtil2.post(url, criteria, headers);
         System.out.println(res.rawContent);
     }
 }

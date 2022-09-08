@@ -25,7 +25,7 @@ public class LotteryConfig {
 
 
     public static class Referer {
-        public static final String LOTTERY_OPT = ORIGIN + "/lotteryV2/index.do";
+        public static final String LOTTERY_INDEX = ORIGIN + "/lotteryV2/index.do";
     }
 
 

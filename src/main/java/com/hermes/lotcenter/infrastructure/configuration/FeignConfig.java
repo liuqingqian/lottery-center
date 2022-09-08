@@ -43,6 +43,8 @@ public class FeignConfig {
 //            template.header(TraceIdUtil.TRACE_ID, traceId);
             template.header("Host", LotteryConfig.HOST);
             template.header("Origin", LotteryConfig.ORIGIN);
+//            template.header("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+            template.header("Accept", "application/json, text/javascript, */*; q=0.01");
             template.header("Accept-Encoding", "gzip, deflate");
             template.header("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8");
             template.header("Pragma", "no-cache");

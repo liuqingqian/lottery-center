@@ -41,7 +41,7 @@ spring:
     database: 0
     host: 192.168.2.222
     port: 6379
-#    password: It0SVN8R7BZYpJHl
+    #    password: It0SVN8R7BZYpJHl
     lettuce:
       pool:
         max-active: 100
@@ -56,3 +56,5 @@ log:
 logging:
   level:
     com.hermes.lotcenter.domain.rpc.LotteryClient: debug
+    com.hermes.lotcenter.domain.rpc.LotteryBetClient: debug
+    com.hermes.lotcenter.infrastructure.utils.NetUtil2: debug
