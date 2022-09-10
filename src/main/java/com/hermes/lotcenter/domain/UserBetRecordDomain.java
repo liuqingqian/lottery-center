@@ -1,16 +1,20 @@
 package com.hermes.lotcenter.domain;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Lists;
+import com.hermes.lotcenter.domain.dto.BetTaskStatsDTO;
 import com.hermes.lotcenter.entity.UserBetRecordEntity;
 import com.hermes.lotcenter.repository.UserBetRecordMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -88,5 +92,29 @@ public class UserBetRecordDomain extends ServiceImpl<UserBetRecordMapper, UserBe
         queryWrapper.eq(UserBetRecordEntity::getPeriodNumber, periodNumber);
 
         return baseMapper.selectList(queryWrapper);
+    }
+
+    public BetTaskStatsDTO queryBetTaskStats(String taskNo, String code) {
+        if (StringUtils.isBlank(taskNo) || StringUtils.isBlank(code)) {
+            return null;
+        }
+        QueryWrapper<UserBetRecordEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("COUNT(period_number) AS betTimes",
+                "SUM(buy_money) AS totalBuyMoney",
+                "SUM(win_money) AS totalWinMoney")
+                .eq("task_no", taskNo)
+                .eq("code", code);
+        Map<String, Object> map = this.getMap(queryWrapper);
+        Long betTimes = (Long) map.get("betTimes");
+        BigDecimal totalBuyMoney = (BigDecimal) map.get("totalBuyMoney");
+        BigDecimal totalWinMoney = (BigDecimal) map.get("totalWinMoney");
+        BetTaskStatsDTO betTaskStatsDTO = new BetTaskStatsDTO();
+        betTaskStatsDTO.setTaskNo(taskNo);
+        betTaskStatsDTO.setCode(code);
+        betTaskStatsDTO.setBetTimes(betTimes.intValue());
+        betTaskStatsDTO.setTotalBuyMoney(totalBuyMoney.doubleValue());
+        betTaskStatsDTO.setTotalWinMoney(totalWinMoney.doubleValue());
+
+        return betTaskStatsDTO;
     }
 }

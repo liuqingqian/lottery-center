@@ -1,7 +1,8 @@
 package com.hermes.lotcenter.domain.strategy;
 
+import com.hermes.lotcenter.domain.BetTaskRiskDomain;
 import com.hermes.lotcenter.domain.DoBetDomain;
-import com.hermes.lotcenter.domain.UserBetRecordDomain;
+import com.hermes.lotcenter.domain.dto.RiskResultDTO;
 import com.hermes.lotcenter.domain.dto.SpittleStrategyDataDTO;
 import com.hermes.lotcenter.domain.dto.StrategyResultDTO;
 import com.hermes.lotcenter.domain.rpc.response.LotteryOptResponse;
@@ -27,7 +28,8 @@ public class SpittleStrategyImpl implements IBetStrategy {
     private DoBetDomain doBetDomain;
 
     @Autowired
-    private UserBetRecordDomain userBetRecordDomain;
+    private BetTaskRiskDomain riskDomain;
+
 
     @Override
     public StrategyResultDTO strategy(LotteryOptResponse.Last last, UserBetRecordEntity lastBetRecord, LotteryOptResponse.Current current, UserBetTaskEntity userBetTask) {
@@ -74,9 +76,19 @@ public class SpittleStrategyImpl implements IBetStrategy {
 
         String taskNo = userBetTask.getTaskNo();
         String code = userBetTask.getCode();
-        //判断任务是否中断
-//        List<UserBetRecordEntity> userBetRecordEntities = userBetRecordDomain.queryByTaskList(taskNo, code);
-
+        //风险控制
+        RiskResultDTO riskResultDTO = riskDomain.checkBetRisk(taskNo, code, userBetTask);
+        if (Objects.isNull(riskResultDTO)) {
+            resultDTO.setMessage("风险控制结果为空");
+            resultDTO.setStatus(StrategyResultStatusEnum.FAIL.getCode());
+            return resultDTO;
+        }
+        System.out.println("[Risk] RiskResultDTO = " + riskResultDTO);
+        if (RiskResultEnum.RISK.equals(riskResultDTO.getStatus())) {
+            resultDTO.setMessage(riskResultDTO.getMessage());
+            resultDTO.setStatus(StrategyResultStatusEnum.FAIL.getCode());
+            return resultDTO;
+        }
 
         Double betAmount;
         List<Double> strategy = spittleStrategy.getStrategy();

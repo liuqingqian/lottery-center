@@ -1,6 +1,7 @@
 package com.hermes.lotcenter;
 
 import com.hermes.lotcenter.domain.UserBetRecordDomain;
+import com.hermes.lotcenter.domain.dto.BetTaskStatsDTO;
 import com.hermes.lotcenter.entity.UserBetRecordEntity;
 import org.junit.Assert;
 import org.junit.Test;
@@ -112,5 +113,14 @@ public class TestUserBetRecordDomain {
         Assert.assertNotNull("查询投注记录列表为空", betRecordEntities);
         Assert.assertTrue("查询投注记录列表无数据", betRecordEntities.size() > 0);
         System.out.println("betRecordEntities = " + betRecordEntities);
+    }
+
+    @Test
+    public void testQueryBetTaskStats() {
+        String taskNo = "T202209090000001";
+        String lotCode = "FFK3";
+        BetTaskStatsDTO betTaskStatsDTO = userBetRecordDomain.queryBetTaskStats(taskNo, lotCode);
+        Assert.assertNotNull("查询投注统计数据信息为空", betTaskStatsDTO);
+        System.out.println("betTaskStatsDTO = " + betTaskStatsDTO);
     }
 }
