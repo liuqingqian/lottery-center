@@ -117,12 +117,12 @@ public class MockTask {
                             //插入投注记录成功则发送投注请求
                             // sleep in milliseconds
                             int sleepSeconds = RandomUtils.nextInt(5, 25);
+                            System.out.println("准备发送投注请求，" + sleepSeconds + " 秒后执行......");
                             try {
                                 Thread.sleep(sleepSeconds * 1000);
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            System.out.println("准备发送投注请求，" + sleepSeconds + " 秒后执行......");
                             String qiHao = strategyResultDTO.getQiHao();
                             String haoMa = strategyResultDTO.getHaoMa();
                             Double money = strategyResultDTO.getMoney();

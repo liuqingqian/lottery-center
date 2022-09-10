@@ -36,7 +36,7 @@ public class TestUserBetTaskDomain {
         String accountName = "kongkong888";
         Double stopLossAmount = 300.00D;
         Double stopProfitAmount = 500.00D;
-        Integer maxTimes = 200;
+        Integer maxTimes = 500;
         Double maxAmount = 20000.00D;
         Integer strategyType = StrategyTypeEnum.POSITIVE_SPITTLE.getCode();
         SpittleStrategyDataDTO spittleStrategyDataDTO = new SpittleStrategyDataDTO();
