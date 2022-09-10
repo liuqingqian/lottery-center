@@ -62,7 +62,7 @@ public class TestAnalysisMockDomain {
 //        List<Integer> lotStrategy = Arrays.asList(300, 240, 180, 150, 150);
         List<Integer> lotStrategy = Arrays.asList(500, 400, 300, 250, 250);
         String lotCode = "FFK3";
-        String startDate = "2022-09-05";
+        String startDate = "2022-09-08";
         int startCycleGroup = 18;//18（1021）、20（1141））、22（1261）
         int endCycleGroup = 24;
         int cycleTime = 60;
@@ -122,7 +122,7 @@ public class TestAnalysisMockDomain {
 //        List<Integer> lotStrategy = Arrays.asList(300, 240, 180, 150, 150);
         List<Integer> lotStrategy = Arrays.asList(500, 400, 300, 250, 250);
         String lotCode = "FFK3";
-        String startMonth = "2022-02";
+        String startMonth = "2022-08";
         int startCycleGroup = 18;//18（1021）、20（1141））、22（1261）
         int endCycleGroup = 24;
         int cycleTime = 60;

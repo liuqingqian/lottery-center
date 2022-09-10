@@ -3,22 +3,21 @@ package com.hermes.lotcenter.infrastructure.enums;
 import java.util.Objects;
 
 /**
- * Created by liuqingqian on 2022/9/6.
+ * Created by liuqingqian on 2022/9/9.
  * <p>
- * 交易状态枚举 @1:止损@2:止盈@3:已出场@4:未入场
+ * 策略结果状态枚举： @1:正常@2:异常@3:跳过
  */
-public enum TradingStatusEnum {
+public enum StrategyResultStatusEnum {
 
-    STOP_LOSS(1, "止损"),
-    STOP_PROFIT(2, "止盈"),
-    STOP(3, "已出场"),
-    NOT_START(4, "未入场");
+    SUCCESS(1, "正常"),
+    FAIL(2, "异常"),
+    SKIP(3, "跳过");
 
     private Integer code;
 
     private String desc;
 
-    TradingStatusEnum(Integer code, String desc) {
+    StrategyResultStatusEnum(Integer code, String desc) {
         this.code = code;
         this.desc = desc;
     }
@@ -35,16 +34,17 @@ public enum TradingStatusEnum {
         return this.getCode().equals(code);
     }
 
-    public static TradingStatusEnum fromCode(Integer code) {
+    public static StrategyResultStatusEnum fromCode(Integer code) {
         if (Objects.isNull(code)) {
             return null;
         }
-        TradingStatusEnum[] values = values();
-        for (TradingStatusEnum item : values) {
+        StrategyResultStatusEnum[] values = values();
+        for (StrategyResultStatusEnum item : values) {
             if (item.getCode().equals(code)) {
                 return item;
             }
         }
         return null;
     }
+
 }

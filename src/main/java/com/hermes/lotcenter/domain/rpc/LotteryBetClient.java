@@ -25,6 +25,7 @@ public interface LotteryBetClient {
 
     //TODO:用FeignClient发送 From表单数据未设置成功，后续再研究，目前代替方案使用LotteryBetDomain，NetUtil2发送完成；
     @PostMapping(value = "/lotteryV2Bet/dolotV2Bet.do", consumes = APPLICATION_FORM_URLENCODED_VALUE,
-            headers = {"Referer=" + LotteryConfig.Referer.LOTTERY_INDEX, "X-Requested-With=XMLHttpRequest", "Cookie=SESSION=77954a18-d501-46e5-b9e8-aefb529513a1"})
+            headers = {"Referer=" + LotteryConfig.Referer.LOTTERY_INDEX, "X-Requested-With=XMLHttpRequest",
+                    "Cookie=SESSION=" + LotteryConfig.SESSION})
     DoBetResponse doBet(Map<String, ?> formCriteria);
 }

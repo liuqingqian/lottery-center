@@ -35,7 +35,7 @@ public class FileOptDomainTest {
         String url = LotteryConfig.RESULT_85_URL;
         Map<String, Object> params = new HashMap<>();
         String lotCode = "FFK3";
-        String startDate = "2022-09-06";
+        String startDate = "2022-09-09";
         params.put("lotCode", lotCode);
         params.put("startDate", startDate);
         String rawContent = downloadLotDomain.getHtmlRawContent(url, params);

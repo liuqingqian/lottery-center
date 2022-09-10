@@ -85,7 +85,7 @@ public class TestLotteryNetUtil {
 
         String lotCode = "FFK3";
         String qiHao = "202209071316";
-        Integer money = 1;
+        Double money = 1D;
         String name = "双";
         BetDataIdEnum dataIdEnum = BetDataIdEnum.fromName(name);
         DoBetDomain doBetDomain = new DoBetDomain();

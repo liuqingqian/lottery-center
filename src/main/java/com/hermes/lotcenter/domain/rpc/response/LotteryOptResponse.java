@@ -48,6 +48,7 @@ public class LotteryOptResponse {
         @ApiModelProperty("系统时间")
         private String serverTime;//yyyy-MM-dd HH:mm:ss
 
+        @ApiModelProperty("开盘时长，单位：秒")
         private Integer ago;
 
         @ApiModelProperty("状态")

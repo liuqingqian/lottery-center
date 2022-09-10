@@ -1,14 +1,11 @@
 package com.hermes.lotcenter;
 
-import com.hermes.lotcenter.domain.DoBetDomain;
 import com.hermes.lotcenter.domain.rpc.LotteryClient;
-import com.hermes.lotcenter.domain.rpc.criteria.DoBetCriteria;
 import com.hermes.lotcenter.domain.rpc.criteria.LotteryLastCriteria;
 import com.hermes.lotcenter.domain.rpc.criteria.LotteryOptCriteria;
-import com.hermes.lotcenter.domain.rpc.response.DoBetResponse;
 import com.hermes.lotcenter.domain.rpc.response.LotteryLastResponse;
 import com.hermes.lotcenter.domain.rpc.response.LotteryOptResponse;
-import com.hermes.lotcenter.infrastructure.enums.BetDataIdEnum;
+import com.hermes.lotcenter.domain.rpc.response.MemberInfoResponse;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,8 +23,13 @@ public class TestLotteryClient {
     @Autowired
     private LotteryClient lotteryClient;
 
-    @Autowired
-    private DoBetDomain doBetDomain;
+    @Test
+    public void testMemberInfo() {
+        MemberInfoResponse response = lotteryClient.memberInfo();
+
+        Assert.assertEquals("获取会员状态信息失败", true, response.isSuccess());
+        System.out.println("response= " + response);
+    }
 
 
     @Test
@@ -39,7 +41,7 @@ public class TestLotteryClient {
 
         LotteryOptResponse response = lotteryClient.lotteryOpt(lotteryOptCriteria);
 
-        Assert.assertEquals(response.getMsg(), true, response.getSuccess());
+        Assert.assertEquals(response.getMsg(), true, response.isSuccess());
         System.out.println("response= " + response);
 
     }
@@ -55,11 +57,9 @@ public class TestLotteryClient {
 
         LotteryLastResponse response = lotteryClient.lotteryLast(lotteryLastCriteria);
 
-        Assert.assertEquals(response.getMsg(), true, response.getSuccess());
+        Assert.assertEquals(response.getMsg(), true, response.isSuccess());
         System.out.println("response= " + response);
     }
-
-
 
 
 }

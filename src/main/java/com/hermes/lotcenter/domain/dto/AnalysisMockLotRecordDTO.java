@@ -58,7 +58,7 @@ public class AnalysisMockLotRecordDTO {
     @ApiModelProperty("场内最大盈利")
     private Integer maxProfit;
 
-    @ApiModelProperty("交易状态 @1:止损@2:止盈@3:出场")
+    @ApiModelProperty("交易状态 @1:止损@2:止盈@3:已出场@4:未入场")
     private Integer tradingStatus;
 
     @ApiModelProperty("本次投注记录（完整）")

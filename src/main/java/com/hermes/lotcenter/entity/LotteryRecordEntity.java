@@ -15,7 +15,7 @@ import lombok.Data;
 public class LotteryRecordEntity {
 
     @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
+    private Long id;
 
     @TableField("code")
     @ApiModelProperty("彩种编码")
@@ -55,7 +55,7 @@ public class LotteryRecordEntity {
 
     @TableField("lot_status")
     @ApiModelProperty("状态 @1:已开奖@2:未开奖")
-    private int lotStatus;
+    private Integer lotStatus;
 
     @TableField("lot_time")
     @ApiModelProperty("开奖时间")

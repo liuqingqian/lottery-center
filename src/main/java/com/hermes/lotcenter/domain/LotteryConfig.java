@@ -13,10 +13,12 @@ public class LotteryConfig {
 
     public static final String ORIGIN = "http://" + HOST;
 
+    public static final String SESSION = "5bb0c377-cea8-40e1-83db-964e09ddb57d";
+
     /**
      * 开奖结果URL
      */
-    public static final String RESULT_85_URL = "http://8585055.cc/lotteryV2/resultList.do";
+    public static final String RESULT_85_URL = ORIGIN + "/lotteryV2/resultList.do";
 
     /**
      * 彩种文件主路径

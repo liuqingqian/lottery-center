@@ -5,6 +5,7 @@ import com.hermes.lotcenter.domain.rpc.criteria.LotteryLastCriteria;
 import com.hermes.lotcenter.domain.rpc.criteria.LotteryOptCriteria;
 import com.hermes.lotcenter.domain.rpc.response.LotteryLastResponse;
 import com.hermes.lotcenter.domain.rpc.response.LotteryOptResponse;
+import com.hermes.lotcenter.domain.rpc.response.MemberInfoResponse;
 import feign.hystrix.FallbackFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,12 @@ public class LotteryClientFallbackFactory implements FallbackFactory<LotteryClie
     @Override
     public LotteryClient create(Throwable throwable) {
         return new LotteryClient() {
+            @Override
+            public MemberInfoResponse memberInfo() {
+                log.error("rpc LotteryClient memberInfo error:{}", throwable.getMessage());
+                return null;
+            }
+
             @Override
             public LotteryOptResponse lotteryOpt(LotteryOptCriteria criteria) {
                 log.error("rpc LotteryClient lotteryOpt error:{}", throwable.getMessage());
