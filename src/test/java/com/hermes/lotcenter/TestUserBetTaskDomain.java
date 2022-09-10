@@ -30,20 +30,20 @@ public class TestUserBetTaskDomain {
 
     @Test
     public void testInsert() {
-        String taskNo = "T202209090000001";
+        String taskNo = "T202209110000001";
         String lotCode = "FFK3";
         Long accountId = 946902L;
         String accountName = "kongkong888";
-        Double stopLossAmount = 30.00D;
-        Double stopProfitAmount = 100.00D;
-        Integer maxTimes = 500;
-        Double maxAmount = 2000.00D;
+        Double stopLossAmount = 300.00D;
+        Double stopProfitAmount = 500.00D;
+        Integer maxTimes = 200;
+        Double maxAmount = 20000.00D;
         Integer strategyType = StrategyTypeEnum.POSITIVE_SPITTLE.getCode();
         SpittleStrategyDataDTO spittleStrategyDataDTO = new SpittleStrategyDataDTO();
-        List<Double> strategy = Arrays.asList(5D, 4D, 3D, 2D, 2D);
+        List<Double> strategy = Arrays.asList(50D, 40D, 30D, 25D, 25D);
         spittleStrategyDataDTO.setStrategy(strategy);
         spittleStrategyDataDTO.setSidedType(SidedTypeEnum.SINGLE_DOUBLE.getCode());
-        String sessionId = LotteryConfig.SESSION;
+        String sessionId = "fca6a4d4-822b-4e71-a076-bbdc49a37291";
         UserBetTaskEntity userBetTaskEntity = new UserBetTaskEntity();
         userBetTaskEntity.setTaskNo(taskNo);
         userBetTaskEntity.setCode(lotCode);
@@ -57,6 +57,7 @@ public class TestUserBetTaskDomain {
         userBetTaskEntity.setStrategyData(spittleStrategyDataDTO);
         userBetTaskEntity.setSessionId(sessionId);
         userBetTaskEntity.setHeaders("");
+        userBetTaskEntity.setStatus(BetTaskStatusEnum.DOING.getCode());
 
         int insert = userBetTaskDomain.insert(userBetTaskEntity);
         Assert.assertTrue("插入投注任务失败", insert > 0);
@@ -73,7 +74,7 @@ public class TestUserBetTaskDomain {
 
     @Test
     public void testUpdateTaskStatus() {
-        String taskNo = "T202209090000001";
+        String taskNo = "T202209110000001";
         Integer status = BetTaskStatusEnum.DOING.getCode();
         int updateTaskStatus = userBetTaskDomain.updateTaskStatus(taskNo, status);
         Assert.assertTrue("更新投注任务状态失败", updateTaskStatus > 0);
@@ -82,7 +83,7 @@ public class TestUserBetTaskDomain {
 
     @Test
     public void testUpdateTaskSession() {
-        String taskNo = "T202209090000001";
+        String taskNo = "T202209110000001";
         String sessionId = "fca6a4d4-822b-4e71-a076-bbdc49a37291";
 //        String sessionId = LotteryConfig.SESSION;
         int updateTaskStatus = userBetTaskDomain.updateTaskSession(taskNo, sessionId);
@@ -92,7 +93,7 @@ public class TestUserBetTaskDomain {
 
     @Test
     public void testUpdateTaskStrategy() {
-        String taskNo = "T202209090000001";
+        String taskNo = "T202209110000001";
         Integer strategyType = StrategyTypeEnum.POSITIVE_SPITTLE.getCode();
         SpittleStrategyDataDTO spittleStrategyDataDTO = new SpittleStrategyDataDTO();
         List<Double> strategy = Arrays.asList(5D, 4D, 3D, 2D, 2D);

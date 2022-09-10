@@ -112,8 +112,8 @@ public class UserBetRecordDomain extends ServiceImpl<UserBetRecordMapper, UserBe
         betTaskStatsDTO.setTaskNo(taskNo);
         betTaskStatsDTO.setCode(code);
         betTaskStatsDTO.setBetTimes(betTimes.intValue());
-        betTaskStatsDTO.setTotalBuyMoney(totalBuyMoney.doubleValue());
-        betTaskStatsDTO.setTotalWinMoney(totalWinMoney.doubleValue());
+        betTaskStatsDTO.setTotalBuyMoney(Objects.isNull(totalBuyMoney) ? 0 : totalBuyMoney.doubleValue());
+        betTaskStatsDTO.setTotalWinMoney(Objects.isNull(totalWinMoney) ? 0 : totalWinMoney.doubleValue());
 
         return betTaskStatsDTO;
     }

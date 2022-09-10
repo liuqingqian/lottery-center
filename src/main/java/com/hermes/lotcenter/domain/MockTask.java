@@ -2,15 +2,19 @@ package com.hermes.lotcenter.domain;
 
 import com.beicai.common.DateTimeUtil;
 import com.hermes.lotcenter.domain.dto.StrategyResultDTO;
+import com.hermes.lotcenter.domain.rpc.criteria.DoBetCriteria;
+import com.hermes.lotcenter.domain.rpc.response.DoBetResponse;
 import com.hermes.lotcenter.domain.rpc.response.LotteryLastResponse;
 import com.hermes.lotcenter.domain.rpc.response.LotteryOptResponse;
 import com.hermes.lotcenter.domain.rpc.response.MemberInfoResponse;
 import com.hermes.lotcenter.domain.strategy.SpittleStrategyImpl;
 import com.hermes.lotcenter.entity.UserBetRecordEntity;
 import com.hermes.lotcenter.entity.UserBetTaskEntity;
+import com.hermes.lotcenter.infrastructure.enums.BetDataIdEnum;
 import com.hermes.lotcenter.infrastructure.enums.BetTaskStatusEnum;
 import com.hermes.lotcenter.infrastructure.enums.StrategyResultStatusEnum;
 import com.hermes.lotcenter.infrastructure.enums.UserBetRecordStatusEnum;
+import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -44,7 +48,7 @@ public class MockTask {
     public void task() {
 
         String lotCode = "FFK3";
-        String taskNo = "T202209090000001";
+        String taskNo = "T202209110000001";
 
         MemberInfoResponse memberInfoResponse = lotteryBetDomain.memberInfo(taskNo);
         UserBetTaskEntity userBetTask = userBetTaskDomain.query(taskNo);
@@ -111,7 +115,21 @@ public class MockTask {
                         System.out.println("[InsertBetRecord] betRecord = " + betRecordEntity + ",insertBetRecord add " + insertBetRecord);
                         if (insertBetRecord > 0) {
                             //插入投注记录成功则发送投注请求
-                            System.out.println("模拟发送投注请求");
+                            // sleep in milliseconds
+                            int sleepSeconds = RandomUtils.nextInt(5, 25);
+                            try {
+                                Thread.sleep(sleepSeconds * 1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            System.out.println("准备发送投注请求，" + sleepSeconds + " 秒后执行......");
+                            String qiHao = strategyResultDTO.getQiHao();
+                            String haoMa = strategyResultDTO.getHaoMa();
+                            Double money = strategyResultDTO.getMoney();
+                            BetDataIdEnum dataIdEnum = BetDataIdEnum.fromName(haoMa);
+                            DoBetCriteria criteria = doBetDomain.buildCriteria(lotCode, qiHao, money, dataIdEnum);
+                            DoBetResponse response = lotteryBetDomain.doBet(taskNo, criteria);
+                            System.out.println("发送投注请求Response=" + response);
                         }
                     }
                 }
