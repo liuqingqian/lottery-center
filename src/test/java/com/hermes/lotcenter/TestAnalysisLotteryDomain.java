@@ -37,7 +37,7 @@ public class TestAnalysisLotteryDomain {
     @Test
     public void testMatchingScoreList() {
         String lotCode = "FFK3";
-        String startDate = "2022-09-03";
+        String startDate = "2022-09-10";
         List<LotteryRecordEntity> lotteryRecordEntities = lotteryRecordDomain.queryListByDate(lotCode, startDate);
         List<LotMatchingScoreDTO> lotMatchingScoreList = analysisLotteryDomain.matchingScoreList(lotteryRecordEntities);
 
@@ -50,7 +50,7 @@ public class TestAnalysisLotteryDomain {
     @Test
     public void testGroupMatchingScore() {
         String lotCode = "FFK3";
-        String startDate = "2022-09-09";
+        String startDate = "2022-09-11";
         List<LotMatchingScoreDTO> lotMatchingScoreList = analysisLotteryDomain.matchingScoreList(lotteryRecordDomain.queryListByDate(lotCode, startDate));
         int totalSize = lotMatchingScoreList.size();
         int cycleTime = 60;
@@ -92,7 +92,7 @@ public class TestAnalysisLotteryDomain {
         int daysOfMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
         String format = "%s-%02d";
         List<DayTimeHotDTO> dayTimeHots = Lists.newArrayList();
-        for (int i = 1; i <= 9; i++) {
+        for (int i = 1; i <= 10; i++) {
             DayTimeHotDTO dayTimeHot = new DayTimeHotDTO();
             String startDate = String.format(format, startMonth, i);
             System.out.println("startDate = " + startDate);

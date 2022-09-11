@@ -48,7 +48,7 @@ public class MockTask {
     public void task() {
 
         String lotCode = "FFK3";
-        String taskNo = "T202209110000001";
+        String taskNo = "T202209110000004";
 
         MemberInfoResponse memberInfoResponse = lotteryBetDomain.memberInfo(taskNo);
         UserBetTaskEntity userBetTask = userBetTaskDomain.query(taskNo);

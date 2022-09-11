@@ -1,6 +1,5 @@
 package com.hermes.lotcenter;
 
-import com.hermes.lotcenter.domain.LotteryConfig;
 import com.hermes.lotcenter.domain.UserBetTaskDomain;
 import com.hermes.lotcenter.domain.dto.SpittleStrategyDataDTO;
 import com.hermes.lotcenter.entity.UserBetTaskEntity;
@@ -29,8 +28,8 @@ public class TestUserBetTaskDomain {
 
 
     @Test
-    public void testInsert() {
-        String taskNo = "T202209110000001";
+    public void testInsertSmall() {
+        String taskNo = "T202209110000003";
         String lotCode = "FFK3";
         Long accountId = 946902L;
         String accountName = "kongkong888";
@@ -41,6 +40,115 @@ public class TestUserBetTaskDomain {
         Integer strategyType = StrategyTypeEnum.POSITIVE_SPITTLE.getCode();
         SpittleStrategyDataDTO spittleStrategyDataDTO = new SpittleStrategyDataDTO();
         List<Double> strategy = Arrays.asList(50D, 40D, 30D, 25D, 25D);
+        spittleStrategyDataDTO.setStrategy(strategy);
+        spittleStrategyDataDTO.setSidedType(SidedTypeEnum.SINGLE_DOUBLE.getCode());
+        String sessionId = "fca6a4d4-822b-4e71-a076-bbdc49a37291";
+        UserBetTaskEntity userBetTaskEntity = new UserBetTaskEntity();
+        userBetTaskEntity.setTaskNo(taskNo);
+        userBetTaskEntity.setCode(lotCode);
+        userBetTaskEntity.setAccountName(accountName);
+        userBetTaskEntity.setAccountId(accountId);
+        userBetTaskEntity.setStopLossAmount(stopLossAmount);
+        userBetTaskEntity.setStopProfitAmount(stopProfitAmount);
+        userBetTaskEntity.setMaxAmount(maxAmount);
+        userBetTaskEntity.setMaxTimes(maxTimes);
+        userBetTaskEntity.setStrategyType(strategyType);
+        userBetTaskEntity.setStrategyData(spittleStrategyDataDTO);
+        userBetTaskEntity.setSessionId(sessionId);
+        userBetTaskEntity.setHeaders("");
+        userBetTaskEntity.setStatus(BetTaskStatusEnum.DOING.getCode());
+
+        int insert = userBetTaskDomain.insert(userBetTaskEntity);
+        Assert.assertTrue("插入投注任务失败", insert > 0);
+        System.out.println("userBetTaskEntity = " + userBetTaskEntity);
+    }
+
+    @Test
+    public void testInsertSmall2() {
+        String taskNo = "T202209110000004";
+        String lotCode = "FFK3";
+        Long accountId = 946902L;
+        String accountName = "kongkong888";
+        Double stopLossAmount = 600.00D;
+        Double stopProfitAmount = 1000.00D;
+        Integer maxTimes = 500;
+        Double maxAmount = 40000.00D;
+        Integer strategyType = StrategyTypeEnum.POSITIVE_SPITTLE.getCode();
+        SpittleStrategyDataDTO spittleStrategyDataDTO = new SpittleStrategyDataDTO();
+        List<Double> strategy = Arrays.asList(100D, 80D, 60D, 50D, 50D);
+        spittleStrategyDataDTO.setStrategy(strategy);
+        spittleStrategyDataDTO.setSidedType(SidedTypeEnum.SINGLE_DOUBLE.getCode());
+        String sessionId = "fca6a4d4-822b-4e71-a076-bbdc49a37291";
+        UserBetTaskEntity userBetTaskEntity = new UserBetTaskEntity();
+        userBetTaskEntity.setTaskNo(taskNo);
+        userBetTaskEntity.setCode(lotCode);
+        userBetTaskEntity.setAccountName(accountName);
+        userBetTaskEntity.setAccountId(accountId);
+        userBetTaskEntity.setStopLossAmount(stopLossAmount);
+        userBetTaskEntity.setStopProfitAmount(stopProfitAmount);
+        userBetTaskEntity.setMaxAmount(maxAmount);
+        userBetTaskEntity.setMaxTimes(maxTimes);
+        userBetTaskEntity.setStrategyType(strategyType);
+        userBetTaskEntity.setStrategyData(spittleStrategyDataDTO);
+        userBetTaskEntity.setSessionId(sessionId);
+        userBetTaskEntity.setHeaders("");
+        userBetTaskEntity.setStatus(BetTaskStatusEnum.DOING.getCode());
+
+        int insert = userBetTaskDomain.insert(userBetTaskEntity);
+        Assert.assertTrue("插入投注任务失败", insert > 0);
+        System.out.println("userBetTaskEntity = " + userBetTaskEntity);
+    }
+
+
+    @Test
+    public void testInsertMedium() {
+        String taskNo = "T202209110000004";
+        String lotCode = "FFK3";
+        Long accountId = 946902L;
+        String accountName = "kongkong888";
+        Double stopLossAmount = 1200.00D;
+        Double stopProfitAmount = 2000.00D;
+        Integer maxTimes = 500;
+        Double maxAmount = 80000.00D;
+        Integer strategyType = StrategyTypeEnum.POSITIVE_SPITTLE.getCode();
+        SpittleStrategyDataDTO spittleStrategyDataDTO = new SpittleStrategyDataDTO();
+        List<Double> strategy = Arrays.asList(200D, 160D, 120D, 100D, 100D);
+        spittleStrategyDataDTO.setStrategy(strategy);
+        spittleStrategyDataDTO.setSidedType(SidedTypeEnum.SINGLE_DOUBLE.getCode());
+        String sessionId = "fca6a4d4-822b-4e71-a076-bbdc49a37291";
+        UserBetTaskEntity userBetTaskEntity = new UserBetTaskEntity();
+        userBetTaskEntity.setTaskNo(taskNo);
+        userBetTaskEntity.setCode(lotCode);
+        userBetTaskEntity.setAccountName(accountName);
+        userBetTaskEntity.setAccountId(accountId);
+        userBetTaskEntity.setStopLossAmount(stopLossAmount);
+        userBetTaskEntity.setStopProfitAmount(stopProfitAmount);
+        userBetTaskEntity.setMaxAmount(maxAmount);
+        userBetTaskEntity.setMaxTimes(maxTimes);
+        userBetTaskEntity.setStrategyType(strategyType);
+        userBetTaskEntity.setStrategyData(spittleStrategyDataDTO);
+        userBetTaskEntity.setSessionId(sessionId);
+        userBetTaskEntity.setHeaders("");
+        userBetTaskEntity.setStatus(BetTaskStatusEnum.DOING.getCode());
+
+        int insert = userBetTaskDomain.insert(userBetTaskEntity);
+        Assert.assertTrue("插入投注任务失败", insert > 0);
+        System.out.println("userBetTaskEntity = " + userBetTaskEntity);
+    }
+
+    @Test
+    public void testInsertBig() {
+        String taskNo = "T202209110000004";
+        String lotCode = "FFK3";
+        Long accountId = 946902L;
+        String accountName = "kongkong888";
+        Double stopLossAmount = 3000.00D;
+        Double stopProfitAmount = 5000.00D;
+        Integer maxTimes = 500;
+        Double maxAmount = 200000.00D;
+        Integer strategyType = StrategyTypeEnum.POSITIVE_SPITTLE.getCode();
+        SpittleStrategyDataDTO spittleStrategyDataDTO = new SpittleStrategyDataDTO();
+        List<Double> strategy = Arrays.asList(500D, 400D, 300D, 250D, 250D);
         spittleStrategyDataDTO.setStrategy(strategy);
         spittleStrategyDataDTO.setSidedType(SidedTypeEnum.SINGLE_DOUBLE.getCode());
         String sessionId = "fca6a4d4-822b-4e71-a076-bbdc49a37291";

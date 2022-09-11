@@ -37,7 +37,7 @@ public class TestLotteryRecordDomain {
     @Test
     public void testBatchInsert() {
         String lotCode = "FFK3";
-        String startDate = "2022-09-09";
+        String startDate = "2022-09-11";
 //        String lotCode = "K41";
 //        String startDate = "2022-08-29";
         String rawContent = fileOptDomain.readLotFile(lotCode, startDate);
