@@ -2,6 +2,8 @@ package com.hermes.lotcenter.domain.strategy;
 
 import com.hermes.lotcenter.domain.BetTaskRiskDomain;
 import com.hermes.lotcenter.domain.DoBetDomain;
+import com.hermes.lotcenter.domain.UserBetTaskDomain;
+import com.hermes.lotcenter.domain.dto.BetTaskStatsDTO;
 import com.hermes.lotcenter.domain.dto.RiskResultDTO;
 import com.hermes.lotcenter.domain.dto.SpittleStrategyDataDTO;
 import com.hermes.lotcenter.domain.dto.StrategyResultDTO;
@@ -29,6 +31,9 @@ public class SpittleStrategyImpl implements IBetStrategy {
 
     @Autowired
     private BetTaskRiskDomain riskDomain;
+
+    @Autowired
+    private UserBetTaskDomain userBetTaskDomain;
 
 
     @Override
@@ -87,6 +92,25 @@ public class SpittleStrategyImpl implements IBetStrategy {
         if (RiskResultEnum.RISK.equals(riskResultDTO.getStatus())) {
             resultDTO.setMessage(riskResultDTO.getMessage());
             resultDTO.setStatus(StrategyResultStatusEnum.FAIL.getCode());
+            //更新任务状态
+            BetTaskStatsDTO betTaskStats = riskResultDTO.getBetTaskStats();
+            UserBetTaskEntity updateBetTask = new UserBetTaskEntity();
+            updateBetTask.setStatus(BetTaskStatusEnum.ENDED.getCode());
+            if (riskResultDTO.getMessage().contains(TradingStatusEnum.STOP_PROFIT.getDesc())) {
+                updateBetTask.setTradingStatus(TradingStatusEnum.STOP_PROFIT.getCode());
+            } else if (riskResultDTO.getMessage().contains(TradingStatusEnum.STOP_LOSS.getDesc())) {
+                updateBetTask.setTradingStatus(TradingStatusEnum.STOP_LOSS.getCode());
+            } else {
+                updateBetTask.setTradingStatus(TradingStatusEnum.STOP.getCode());
+            }
+            Double totalBuyMoney = betTaskStats.getTotalBuyMoney();
+            Double totalWinMoney = betTaskStats.getTotalWinMoney();
+            if (totalWinMoney > totalBuyMoney) {
+                updateBetTask.setTotalProfitAmount(totalWinMoney - totalBuyMoney);
+            } else {
+                updateBetTask.setTotalLossAmount(totalBuyMoney - totalWinMoney);
+            }
+            userBetTaskDomain.updateTask(betTaskStats.getTaskNo(), updateBetTask);
             return resultDTO;
         }
 

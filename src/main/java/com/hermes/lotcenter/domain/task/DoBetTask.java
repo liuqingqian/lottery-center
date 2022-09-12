@@ -1,6 +1,10 @@
-package com.hermes.lotcenter.domain;
+package com.hermes.lotcenter.domain.task;
 
 import com.beicai.common.DateTimeUtil;
+import com.hermes.lotcenter.domain.DoBetDomain;
+import com.hermes.lotcenter.domain.LotteryBetDomain;
+import com.hermes.lotcenter.domain.UserBetRecordDomain;
+import com.hermes.lotcenter.domain.UserBetTaskDomain;
 import com.hermes.lotcenter.domain.dto.StrategyResultDTO;
 import com.hermes.lotcenter.domain.rpc.criteria.DoBetCriteria;
 import com.hermes.lotcenter.domain.rpc.response.DoBetResponse;
@@ -26,7 +30,7 @@ import java.util.Objects;
  * Created by liuqingqian on 2022/9/8.
  */
 @Component
-public class MockTask {
+public class DoBetTask {
 
     @Autowired
     private UserBetTaskDomain userBetTaskDomain;
@@ -45,7 +49,7 @@ public class MockTask {
 
 
     @Scheduled(cron = "4 * * * * ?")
-    public void task() {
+    public void doBet() {
 
         String lotCode = "FFK3";
         String taskNo = "T202209120000001";
@@ -57,7 +61,7 @@ public class MockTask {
         String accountName = memberInfoResponse.getAccount();
         Double accountAmount = memberInfoResponse.getMoney();
         String serverTime = memberInfoResponse.getServerTime();
-        System.out.println("触发时间 = " + DateTimeUtil.nowStr());
+        System.out.println("[DoBetTask]触发时间 = " + DateTimeUtil.nowStr());
         System.out.println("serverTime = " + serverTime);
         System.out.println("accountName = " + accountName + ",accountAmount = " + accountAmount);
 

@@ -26,6 +26,16 @@ public class UserBetTaskDomain extends ServiceImpl<UserBetTaskMapper, UserBetTas
         return getBaseMapper().insert(userBetTaskEntity);
     }
 
+    public int updateTask(String taskNo, UserBetTaskEntity updateBetTask) {
+        if (StringUtils.isBlank(taskNo) || Objects.isNull(updateBetTask)) {
+            return 0;
+        }
+        LambdaUpdateWrapper<UserBetTaskEntity> updateWrapper = Wrappers.lambdaUpdate();
+        updateWrapper.eq(UserBetTaskEntity::getTaskNo, taskNo);
+
+        return baseMapper.update(updateBetTask, updateWrapper);
+    }
+
     public int updateTaskStatus(String taskNo, Integer status) {
         BetTaskStatusEnum betTaskStatusEnum = BetTaskStatusEnum.fromCode(status);
         if (StringUtils.isBlank(taskNo) || Objects.isNull(betTaskStatusEnum)) {

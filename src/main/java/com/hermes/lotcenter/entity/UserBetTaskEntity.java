@@ -73,11 +73,11 @@ public class UserBetTaskEntity {
 
     @TableField("total_loss_amount")
     @ApiModelProperty("总回撤金额 单位：元")
-    private Integer totalLossAmount;
+    private Double totalLossAmount;
 
     @TableField("total_profit_amount")
     @ApiModelProperty("总盈利金额 单位：元")
-    private Integer totalProfitAmount;
+    private Double totalProfitAmount;
 
     @TableField("status")
     @ApiModelProperty("投注任务状态@1:未开始@2:进行中@3:已结束@4:已作废")
