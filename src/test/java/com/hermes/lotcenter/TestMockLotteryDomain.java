@@ -63,7 +63,7 @@ public class TestMockLotteryDomain {
         List<Integer> lotStrategy = Arrays.asList(500, 400, 300, 250, 250);
 //        List<Integer> lotStrategy = Arrays.asList(1000, 800, 600, 500, 500);
         String lotCode = "FFK3";
-        String startDate = "2022-09-10";
+        String startDate = "2022-09-12";
         int startCycleGroup = 12;//18（1021）、20（1141））、22（1261）
         int endCycleGroup = 16;
         int cycleTime = 60;

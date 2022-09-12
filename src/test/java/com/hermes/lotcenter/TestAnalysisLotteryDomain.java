@@ -50,7 +50,7 @@ public class TestAnalysisLotteryDomain {
     @Test
     public void testGroupMatchingScore() {
         String lotCode = "FFK3";
-        String startDate = "2022-09-11";
+        String startDate = "2022-09-12";
         List<LotMatchingScoreDTO> lotMatchingScoreList = analysisLotteryDomain.matchingScoreList(lotteryRecordDomain.queryListByDate(lotCode, startDate));
         int totalSize = lotMatchingScoreList.size();
         int cycleTime = 60;

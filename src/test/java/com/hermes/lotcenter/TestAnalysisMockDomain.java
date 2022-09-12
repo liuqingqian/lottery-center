@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
 
 /**
  * Created by liuqingqian on 2022/9/6.
+ * <p>
+ * 统计分析模拟投注记录
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -104,7 +106,7 @@ public class TestAnalysisMockDomain {
                 .filter(analysisMockLotRecordDTO -> TradingStatusEnum.STOP_PROFIT.equals(analysisMockLotRecordDTO.getTradingStatus()))
                 .collect(Collectors.toList()).size();
 
-        Double winningRateDouble = new BigDecimal(winningTimes).divide(new BigDecimal(winningTimes), 4, BigDecimal.ROUND_DOWN).doubleValue();
+        Double winningRateDouble = new BigDecimal(winningTimes).divide(new BigDecimal(total), 4, BigDecimal.ROUND_DOWN).doubleValue();
         String winningRate = (winningRateDouble * 100) + "%";
         System.out.println("winningRate = " + winningRate);
         System.out.println("total = " + total + ",winningTimes = " + winningTimes);
@@ -122,7 +124,7 @@ public class TestAnalysisMockDomain {
 //        List<Integer> lotStrategy = Arrays.asList(300, 240, 180, 150, 150);
         List<Integer> lotStrategy = Arrays.asList(500, 400, 300, 250, 250);
         String lotCode = "FFK3";
-        String startMonth = "2022-08";
+        String startMonth = "2022-07";
         int startCycleGroup = 18;//18（1021）、20（1141））、22（1261）
         int endCycleGroup = 24;
         int cycleTime = 60;

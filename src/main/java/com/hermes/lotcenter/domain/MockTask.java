@@ -48,7 +48,7 @@ public class MockTask {
     public void task() {
 
         String lotCode = "FFK3";
-        String taskNo = "T202209110000004";
+        String taskNo = "T202209120000001";
 
         MemberInfoResponse memberInfoResponse = lotteryBetDomain.memberInfo(taskNo);
         UserBetTaskEntity userBetTask = userBetTaskDomain.query(taskNo);
@@ -61,8 +61,8 @@ public class MockTask {
         System.out.println("serverTime = " + serverTime);
         System.out.println("accountName = " + accountName + ",accountAmount = " + accountAmount);
 
-        if (Objects.isNull(userBetTask)) {
-            System.out.println("userBetTask is null");
+        if (!memberInfoResponse.getLogin() || Objects.isNull(userBetTask)) {
+            System.out.println("userBetTask is null or User Login false");
 
         } else {
             System.out.println("userBetTask = " + userBetTask);

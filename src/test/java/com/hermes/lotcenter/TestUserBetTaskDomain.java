@@ -65,7 +65,7 @@ public class TestUserBetTaskDomain {
 
     @Test
     public void testInsertSmall2() {
-        String taskNo = "T202209110000004";
+        String taskNo = "T202209110000005";
         String lotCode = "FFK3";
         Long accountId = 946902L;
         String accountName = "kongkong888";
@@ -102,7 +102,7 @@ public class TestUserBetTaskDomain {
 
     @Test
     public void testInsertMedium() {
-        String taskNo = "T202209110000004";
+        String taskNo = "T202209120000001";
         String lotCode = "FFK3";
         Long accountId = 946902L;
         String accountName = "kongkong888";
@@ -115,7 +115,7 @@ public class TestUserBetTaskDomain {
         List<Double> strategy = Arrays.asList(200D, 160D, 120D, 100D, 100D);
         spittleStrategyDataDTO.setStrategy(strategy);
         spittleStrategyDataDTO.setSidedType(SidedTypeEnum.SINGLE_DOUBLE.getCode());
-        String sessionId = "fca6a4d4-822b-4e71-a076-bbdc49a37291";
+        String sessionId = "a6f27e66-f403-432d-884b-58275c7bbf91";
         UserBetTaskEntity userBetTaskEntity = new UserBetTaskEntity();
         userBetTaskEntity.setTaskNo(taskNo);
         userBetTaskEntity.setCode(lotCode);
@@ -191,8 +191,8 @@ public class TestUserBetTaskDomain {
 
     @Test
     public void testUpdateTaskSession() {
-        String taskNo = "T202209110000001";
-        String sessionId = "fca6a4d4-822b-4e71-a076-bbdc49a37291";
+        String taskNo = "T202209110000007";
+        String sessionId = "660bf3bb-5b72-49b9-bbd3-d4ed0700aaa7";
 //        String sessionId = LotteryConfig.SESSION;
         int updateTaskStatus = userBetTaskDomain.updateTaskSession(taskNo, sessionId);
         Assert.assertTrue("更新投注任务会话ID失败", updateTaskStatus > 0);
