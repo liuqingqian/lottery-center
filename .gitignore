@@ -2,6 +2,8 @@
 !.mvn/wrapper/maven-wrapper.jar
 /log/
 /logs/
+/output/
+RELEASE
 ### STS ###
 .apt_generated
 .classpath

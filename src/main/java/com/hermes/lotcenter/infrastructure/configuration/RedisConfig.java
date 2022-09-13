@@ -13,7 +13,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import java.nio.charset.Charset;
 import java.util.Objects;
 
-@Configuration
+//@Configuration
 public class RedisConfig {
 
     @Bean

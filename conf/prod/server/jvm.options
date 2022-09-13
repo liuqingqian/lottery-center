@@ -1,7 +1,7 @@
 -Xss256k -Xms2g -Xmx2g
 -XX:+HeapDumpOnOutOfMemoryError
--XX:HeapDumpPath=/home/beicai/logs/jvmLog/
--XX:ErrorFile=/home/beicai/logs/jvmLog/jvm_err.log
+-XX:HeapDumpPath=/Users/liuqingqian/work/hermes/logs/jvmLog/lottery-center/
+-XX:ErrorFile=/Users/liuqingqian/work/hermes/logs/jvmLog/lottery-center/jvm_err.log
 -XX:+UseG1GC
 -XX:+UseGCLogFileRotation
 -XX:NumberOfGCLogFiles=5
@@ -12,4 +12,4 @@
 -XX:+PrintGCDateStamps
 -XX:+PrintGCTimeStamps
 -XX:+PrintGCApplicationStoppedTime
--Xloggc:/home/beicai/logs/jvmLog/gc.log
+-Xloggc:/Users/liuqingqian/work/hermes/logs/jvmLog/lottery-center/gc.log

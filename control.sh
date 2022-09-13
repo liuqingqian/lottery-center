@@ -10,7 +10,7 @@ WORKSPACE=`cd $(dirname $0);pwd`
 cd ${WORKSPACE}
 
 # service info
-app=${}
+app="lottery-center"
 JAVA_OPTS=`cat jvm.options`
 SVCOUTLOG="${app}.out"
 SVCERRLOG="${app}.err"

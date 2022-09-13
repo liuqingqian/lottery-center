@@ -18,7 +18,7 @@
     </appender>
 
     <appender name="FILEERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${logPath}/error.log</file>
+        <file>${logPath}/${appName}/error.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${logPath}/${appName}/error.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
@@ -37,9 +37,9 @@
     </appender>
 
     <appender name="SERVER" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${logPath}/server.log</file>
+        <file>${logPath}/${appName}/server.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${logPath}/server.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${logPath}/${appName}/server.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>7</maxHistory>
             <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>

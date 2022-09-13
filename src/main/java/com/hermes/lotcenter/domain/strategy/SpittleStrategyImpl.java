@@ -11,6 +11,7 @@ import com.hermes.lotcenter.domain.rpc.response.LotteryOptResponse;
 import com.hermes.lotcenter.entity.UserBetRecordEntity;
 import com.hermes.lotcenter.entity.UserBetTaskEntity;
 import com.hermes.lotcenter.infrastructure.enums.*;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,7 @@ import java.util.Objects;
  * <p>
  * 唾沫投注策略
  */
+@Slf4j
 @Component
 public class SpittleStrategyImpl implements IBetStrategy {
 
@@ -88,7 +90,7 @@ public class SpittleStrategyImpl implements IBetStrategy {
             resultDTO.setStatus(StrategyResultStatusEnum.FAIL.getCode());
             return resultDTO;
         }
-        System.out.println("[Risk] RiskResultDTO = " + riskResultDTO);
+        log.info("[Risk] RiskResultDTO = " + riskResultDTO);
         if (RiskResultEnum.RISK.equals(riskResultDTO.getStatus())) {
             resultDTO.setMessage(riskResultDTO.getMessage());
             resultDTO.setStatus(StrategyResultStatusEnum.FAIL.getCode());

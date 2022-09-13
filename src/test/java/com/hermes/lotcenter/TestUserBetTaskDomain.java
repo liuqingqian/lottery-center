@@ -29,10 +29,10 @@ public class TestUserBetTaskDomain {
 
     @Test
     public void testInsertSmall() {
-        String taskNo = "T202209110000003";
+        String taskNo = "T20220913H000001";
         String lotCode = "FFK3";
-        Long accountId = 946902L;
-        String accountName = "kongkong888";
+        Long accountId = 946912L;
+        String accountName = "lh1384888";
         Double stopLossAmount = 300.00D;
         Double stopProfitAmount = 500.00D;
         Integer maxTimes = 500;
@@ -42,7 +42,7 @@ public class TestUserBetTaskDomain {
         List<Double> strategy = Arrays.asList(50D, 40D, 30D, 25D, 25D);
         spittleStrategyDataDTO.setStrategy(strategy);
         spittleStrategyDataDTO.setSidedType(SidedTypeEnum.SINGLE_DOUBLE.getCode());
-        String sessionId = "fca6a4d4-822b-4e71-a076-bbdc49a37291";
+        String sessionId = "c356f3b3-ae5e-4391-8187-9015f76fa6f9";
         UserBetTaskEntity userBetTaskEntity = new UserBetTaskEntity();
         userBetTaskEntity.setTaskNo(taskNo);
         userBetTaskEntity.setCode(lotCode);
@@ -102,7 +102,7 @@ public class TestUserBetTaskDomain {
 
     @Test
     public void testInsertMedium() {
-        String taskNo = "T202209120000001";
+        String taskNo = "T202209130000001";
         String lotCode = "FFK3";
         Long accountId = 946902L;
         String accountName = "kongkong888";

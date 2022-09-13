@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 8001
 
 spring:
   datasource:
@@ -28,28 +28,19 @@ spring:
         pool-prepared-statements: true
       datasource:
         lottery-center:
-          username: bccm_deve
-          password: bccmDEVE123!
+          username: root
+          password: 123456
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://192.168.2.223:3306/lottery-center?useUnicode=true&autoReconnect=true&characterEncoding=utf-8
+          url: jdbc:mysql://127.0.0.1:3306/lottery_center?useUnicode=true&autoReconnect=true&characterEncoding=utf-8
         lottery-center-slave:
-          username: bccm_deve
-          password: bccmDEVE123!
+          username: root
+          password: 123456
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://192.168.2.223:3306/lottery-center?useUnicode=true&autoReconnect=true
-  redis:
-    database: 0
-    host: 10.0.101.208
-    port: 6379
-    password: It0SVN8R7BZYpJHl
-    lettuce:
-      pool:
-        max-active: 100
-        min-idle: 20
-        max-idle: 50
+          url: jdbc:mysql://127.0.0.1:3306/lottery_center?useUnicode=true&autoReconnect=true
+
 
 log:
-  path: /home/beicai/logs
+  path: /Users/liuqingqian/work/hermes/logs
 
 logging:
   config: classpath:logback-spring-online.xml

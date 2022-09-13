@@ -7,9 +7,10 @@ cd ${WORKSPACE}
 
 # base info
 MODULE=
-APP=${MODULE}
+APP="lottery-center"
 CONTROL=./control.sh
 OUTPUT="./output"
+DEPLOYDIR="/Users/liuqingqian/work/hermes/app"
 gitversion=RELEASE
 
 
@@ -85,8 +86,10 @@ function get_gitversion() {
     echo "$gv"
 }
 
-
-
+function copy_deploy() {
+  rm -rf ${DEPLOYDIR}/${APP}
+  mv ${OUTPUT}/ ${DEPLOYDIR}/${APP}/
+}
 
 
 #
@@ -95,6 +98,7 @@ build
 #
 make_output
 
+copy_deploy
 #
 echo -e "build done."
 exit 0

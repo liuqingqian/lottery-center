@@ -32,7 +32,7 @@ public class LotteryRecordRefreshTask {
     @Autowired
     private LotteryRecordDomain lotteryRecordDomain;
 
-    @Scheduled(cron = "10 */3 * * * ?")
+//    @Scheduled(cron = "10 */3 * * * ?")
     public void refreshTask() {
         String url = LotteryConfig.RESULT_85_URL;
         Map<String, Object> params = new HashMap<>();
