@@ -40,9 +40,9 @@ public class TestMockLotteryDomain {
         List<Integer> lotStrategy = Arrays.asList(500, 400, 300, 250, 250);
 //        List<Integer> lotStrategy = Arrays.asList(1000, 800, 600, 500, 500);
         String lotCode = "FFK3";
-        String startDate = "2022-09-09";
-        int startCycleGroup = 18;//18（1021）、20（1141））、22（1261）
-        int endCycleGroup = 24;
+        String startDate = "2022-09-13";
+        int startCycleGroup = 5;//18（1021）、20（1141））、22（1261）
+        int endCycleGroup = 7;
         int cycleTime = 60;
         List<MockLotRecordDTO> mockLotRecords = mockLotteryDomain.mockSpittleSize(lotCode, startDate, startCycleGroup, endCycleGroup, cycleTime, initAccountAmount, lotStrategy);
 
@@ -63,9 +63,9 @@ public class TestMockLotteryDomain {
         List<Integer> lotStrategy = Arrays.asList(500, 400, 300, 250, 250);
 //        List<Integer> lotStrategy = Arrays.asList(1000, 800, 600, 500, 500);
         String lotCode = "FFK3";
-        String startDate = "2022-09-12";
-        int startCycleGroup = 13;//18（1021）、20（1141））、22（1261）
-        int endCycleGroup = 19;
+        String startDate = "2022-09-13";
+        int startCycleGroup = 5;//18（1021）、20（1141））、22（1261）
+        int endCycleGroup = 7;
         int cycleTime = 60;
         List<MockLotRecordDTO> mockLotRecords = mockLotteryDomain.mockSpittleSingleDouble(lotCode, startDate, startCycleGroup, endCycleGroup, cycleTime, initAccountAmount, lotStrategy);
         Assert.assertNotNull("模拟[顺投单双策略]投注记录信息列表为空", mockLotRecords);

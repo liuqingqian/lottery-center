@@ -29,7 +29,7 @@ public class TestUserBetTaskDomain {
 
     @Test
     public void testInsertSmall() {
-        String taskNo = "T20220913H000001";
+        String taskNo = "T20220915H000002";
         String lotCode = "FFK3";
         Long accountId = 946912L;
         String accountName = "lh1384888";
@@ -37,12 +37,13 @@ public class TestUserBetTaskDomain {
         Double stopProfitAmount = 500.00D;
         Integer maxTimes = 500;
         Double maxAmount = 20000.00D;
+        String startTime = "2022-09-15 04:00:00";
         Integer strategyType = StrategyTypeEnum.POSITIVE_SPITTLE.getCode();
         SpittleStrategyDataDTO spittleStrategyDataDTO = new SpittleStrategyDataDTO();
         List<Double> strategy = Arrays.asList(50D, 40D, 30D, 25D, 25D);
         spittleStrategyDataDTO.setStrategy(strategy);
-        spittleStrategyDataDTO.setSidedType(SidedTypeEnum.SINGLE_DOUBLE.getCode());
-        String sessionId = "c356f3b3-ae5e-4391-8187-9015f76fa6f9";
+        spittleStrategyDataDTO.setSidedType(SidedTypeEnum.SIZE.getCode());
+        String sessionId = "6207620a-299b-474f-a1b9-1c665831173f";
         UserBetTaskEntity userBetTaskEntity = new UserBetTaskEntity();
         userBetTaskEntity.setTaskNo(taskNo);
         userBetTaskEntity.setCode(lotCode);
@@ -52,6 +53,7 @@ public class TestUserBetTaskDomain {
         userBetTaskEntity.setStopProfitAmount(stopProfitAmount);
         userBetTaskEntity.setMaxAmount(maxAmount);
         userBetTaskEntity.setMaxTimes(maxTimes);
+        userBetTaskEntity.setStartTime(startTime);
         userBetTaskEntity.setStrategyType(strategyType);
         userBetTaskEntity.setStrategyData(spittleStrategyDataDTO);
         userBetTaskEntity.setSessionId(sessionId);
@@ -65,20 +67,21 @@ public class TestUserBetTaskDomain {
 
     @Test
     public void testInsertSmall2() {
-        String taskNo = "T202209110000005";
+        String taskNo = "T202209150000002";
         String lotCode = "FFK3";
         Long accountId = 946902L;
         String accountName = "kongkong888";
         Double stopLossAmount = 600.00D;
         Double stopProfitAmount = 1000.00D;
         Integer maxTimes = 500;
-        Double maxAmount = 40000.00D;
+        Double maxAmount = 50000.00D;
+        String startTime = "2022-09-15 04:00:00";
         Integer strategyType = StrategyTypeEnum.POSITIVE_SPITTLE.getCode();
         SpittleStrategyDataDTO spittleStrategyDataDTO = new SpittleStrategyDataDTO();
         List<Double> strategy = Arrays.asList(100D, 80D, 60D, 50D, 50D);
         spittleStrategyDataDTO.setStrategy(strategy);
-        spittleStrategyDataDTO.setSidedType(SidedTypeEnum.SINGLE_DOUBLE.getCode());
-        String sessionId = "fca6a4d4-822b-4e71-a076-bbdc49a37291";
+        spittleStrategyDataDTO.setSidedType(SidedTypeEnum.SIZE.getCode());
+        String sessionId = "32b76b48-ada4-4c4d-ac0e-9f80301362f2";
         UserBetTaskEntity userBetTaskEntity = new UserBetTaskEntity();
         userBetTaskEntity.setTaskNo(taskNo);
         userBetTaskEntity.setCode(lotCode);
@@ -88,6 +91,7 @@ public class TestUserBetTaskDomain {
         userBetTaskEntity.setStopProfitAmount(stopProfitAmount);
         userBetTaskEntity.setMaxAmount(maxAmount);
         userBetTaskEntity.setMaxTimes(maxTimes);
+        userBetTaskEntity.setStartTime(startTime);
         userBetTaskEntity.setStrategyType(strategyType);
         userBetTaskEntity.setStrategyData(spittleStrategyDataDTO);
         userBetTaskEntity.setSessionId(sessionId);

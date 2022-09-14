@@ -18,7 +18,10 @@ public class DoBetTaskTwo {
 
     @Scheduled(cron = "4 * * * * ?")
     public void doBet() {
-        String taskNo = "T20220913H000001";
-        doBetTaskDomain.doBet(taskNo);
+        String taskNo1 = "T20220915H000001";
+        doBetTaskDomain.doBet(taskNo1);
+        String taskNo2 = "T20220915H000002";
+        doBetTaskDomain.doBet(taskNo2);
+
     }
 }

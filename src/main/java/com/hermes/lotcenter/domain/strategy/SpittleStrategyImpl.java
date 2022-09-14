@@ -105,6 +105,7 @@ public class SpittleStrategyImpl implements IBetStrategy {
             } else {
                 updateBetTask.setTradingStatus(TradingStatusEnum.STOP.getCode());
             }
+            updateBetTask.setTotalTimes(betTaskStats.getBetTimes());
             Double totalBuyMoney = betTaskStats.getTotalBuyMoney();
             Double totalWinMoney = betTaskStats.getTotalWinMoney();
             if (totalWinMoney > totalBuyMoney) {

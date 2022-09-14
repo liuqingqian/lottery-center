@@ -19,6 +19,7 @@ import org.apache.commons.lang3.RandomUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -92,44 +93,51 @@ public class DoBetTaskDomain {
             BetTaskStatusEnum betTaskStatusEnum = BetTaskStatusEnum.fromCode(userBetTaskStatus);
             if (BetTaskStatusEnum.DOING.equals(userBetTaskStatus)) {
                 log.info("[任务]执行中........");
-                if (lotteryOptResponse.isSuccess()) {
+                LocalDateTime nowTime = LocalDateTime.now();
+                String startTime = userBetTask.getStartTime();
+                LocalDateTime startDateTime = LocalDateTime.parse(startTime, DateTimeUtil.yyyy_MM_dd_HH_mm_ss);
+                if (nowTime.isAfter(startDateTime)) {
+                    if (lotteryOptResponse.isSuccess()) {
 
-                    //0、初始化批次投注信息，账号初试金额、该批次当前回撤、当前盈利、是否触发了停止任务：投注次数、投注金额、止损或止盈；
-                    //1、更新上一期开奖的中奖结果 last
-                    String lastQiHao = last.getQiHao();
-                    UserBetRecordEntity lastBetRecord = userBetRecordDomain.query(taskNo, lotCode, lastQiHao);
+                        //0、初始化批次投注信息，账号初试金额、该批次当前回撤、当前盈利、是否触发了停止任务：投注次数、投注金额、止损或止盈；
+                        //1、更新上一期开奖的中奖结果 last
+                        String lastQiHao = last.getQiHao();
+                        UserBetRecordEntity lastBetRecord = userBetRecordDomain.query(taskNo, lotCode, lastQiHao);
 
-                    UserBetRecordEntity updateLastBetRecord = doBetDomain.doLottery(last, lastBetRecord);
-                    int updateBetRecord = userBetRecordDomain.updateBetRecord(taskNo, lotCode, lastQiHao, updateLastBetRecord);
-                    log.info("[UpdateLastBetRecord] updateLastBetRecord = " + updateLastBetRecord + ",updateBetRecord modify " + updateBetRecord);
-                    //2、计算本期应该投注的金额和号码 current
-                    //查询最新状态的上一期投注记录信息
-                    UserBetRecordEntity updatedLastBetRecord = userBetRecordDomain.query(taskNo, lotCode, lastQiHao);
-                    StrategyResultDTO strategyResultDTO = spittleStrategy.strategy(last, updatedLastBetRecord, current, userBetTask);
-                    log.info("strategyResultDTO = " + strategyResultDTO);
-                    if (StrategyResultStatusEnum.SUCCESS.equals(strategyResultDTO.getStatus())) {
-                        UserBetRecordEntity betRecordEntity = doBetDomain.toBetRecord(strategyResultDTO, userBetTask);
-                        int insertBetRecord = userBetRecordDomain.insert(betRecordEntity);
-                        log.info("[InsertBetRecord] betRecord = " + betRecordEntity + ",insertBetRecord add " + insertBetRecord);
-                        if (insertBetRecord > 0) {
-                            //插入投注记录成功则发送投注请求
-                            // sleep in milliseconds
-                            int sleepSeconds = RandomUtils.nextInt(5, 25);
-                            log.info("准备发送投注请求，" + sleepSeconds + " 秒后执行......");
-                            try {
-                                Thread.sleep(sleepSeconds * 1000);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
+                        UserBetRecordEntity updateLastBetRecord = doBetDomain.doLottery(last, lastBetRecord);
+                        int updateBetRecord = userBetRecordDomain.updateBetRecord(taskNo, lotCode, lastQiHao, updateLastBetRecord);
+                        log.info("[UpdateLastBetRecord] updateLastBetRecord = " + updateLastBetRecord + ",updateBetRecord modify " + updateBetRecord);
+                        //2、计算本期应该投注的金额和号码 current
+                        //查询最新状态的上一期投注记录信息
+                        UserBetRecordEntity updatedLastBetRecord = userBetRecordDomain.query(taskNo, lotCode, lastQiHao);
+                        StrategyResultDTO strategyResultDTO = spittleStrategy.strategy(last, updatedLastBetRecord, current, userBetTask);
+                        log.info("strategyResultDTO = " + strategyResultDTO);
+                        if (StrategyResultStatusEnum.SUCCESS.equals(strategyResultDTO.getStatus())) {
+                            UserBetRecordEntity betRecordEntity = doBetDomain.toBetRecord(strategyResultDTO, userBetTask);
+                            int insertBetRecord = userBetRecordDomain.insert(betRecordEntity);
+                            log.info("[InsertBetRecord] betRecord = " + betRecordEntity + ",insertBetRecord add " + insertBetRecord);
+                            if (insertBetRecord > 0) {
+                                //插入投注记录成功则发送投注请求
+                                // sleep in milliseconds
+                                int sleepSeconds = RandomUtils.nextInt(5, 25);
+                                log.info("准备发送投注请求，" + sleepSeconds + " 秒后执行......");
+                                try {
+                                    Thread.sleep(sleepSeconds * 1000);
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                                String qiHao = strategyResultDTO.getQiHao();
+                                String haoMa = strategyResultDTO.getHaoMa();
+                                Double money = strategyResultDTO.getMoney();
+                                BetDataIdEnum dataIdEnum = BetDataIdEnum.fromName(haoMa);
+                                DoBetCriteria criteria = doBetDomain.buildCriteria(lotCode, qiHao, money, dataIdEnum);
+                                DoBetResponse response = lotteryBetDomain.doBet(taskNo, criteria);
+                                log.info("发送投注请求Response=" + response);
                             }
-                            String qiHao = strategyResultDTO.getQiHao();
-                            String haoMa = strategyResultDTO.getHaoMa();
-                            Double money = strategyResultDTO.getMoney();
-                            BetDataIdEnum dataIdEnum = BetDataIdEnum.fromName(haoMa);
-                            DoBetCriteria criteria = doBetDomain.buildCriteria(lotCode, qiHao, money, dataIdEnum);
-                            DoBetResponse response = lotteryBetDomain.doBet(taskNo, criteria);
-                            log.info("发送投注请求Response=" + response);
                         }
                     }
+                } else {
+                    log.info("[任务]未执行，nowTime.isAfter(startDateTime)：" + nowTime.isAfter(startDateTime) + ", startTime: " + startTime);
                 }
 
             } else {

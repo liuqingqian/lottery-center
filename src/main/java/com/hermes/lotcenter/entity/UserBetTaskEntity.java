@@ -51,6 +51,10 @@ public class UserBetTaskEntity {
     @ApiModelProperty("最大投注（累计）金额 单位：元")
     private Double maxAmount;
 
+    @TableField("start_time")
+    @ApiModelProperty("任务开始时间")
+    private String startTime;//yyyy-MM-dd HH:mm:ss
+
     @TableField("strategy_type")
     @ApiModelProperty("投注策略类型 @1:顺投递减@2:逆投递减@3:倍投@4:顺龙@5:斩龙")
     private Integer strategyType;
@@ -70,6 +74,10 @@ public class UserBetTaskEntity {
     @TableField("trading_status")
     @ApiModelProperty("交易状态 @1:止损@2:止盈@3:已出场@4:未入场")
     private Integer tradingStatus;
+
+    @TableField("total_times")
+    @ApiModelProperty("总投注次数")
+    private Integer totalTimes;
 
     @TableField("total_loss_amount")
     @ApiModelProperty("总回撤金额 单位：元")
